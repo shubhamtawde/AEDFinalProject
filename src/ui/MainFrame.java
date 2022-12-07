@@ -120,12 +120,17 @@ public class MainFrame extends javax.swing.JFrame {
                 sqlStatement.setString(1, userName.getText());
                 sqlStatement.setString(2, String.valueOf(password.getPassword()));
                 dbResult = sqlStatement.executeQuery();
-                //System.out.println(dbResult.next());
+               // System.out.println(dbResult.);
                 if (!dbResult.next()) {
                     JOptionPane.showMessageDialog(this, "Invalid credentials");
                    
-                } else {
+                } else if(dbResult.getString(4).equals("System Admin")){
                     SystemAdmin m = new SystemAdmin();
+                    m.setVisible(true);
+                    setVisible(false);
+                }
+                else if(dbResult.getString(4).equals("University Admin")){
+                    ResearcherAdmin m = new ResearcherAdmin(dbResult.getLong(1));
                     m.setVisible(true);
                     setVisible(false);
                 }

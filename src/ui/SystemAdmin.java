@@ -40,7 +40,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         rightPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,7 +119,12 @@ public class SystemAdmin extends javax.swing.JFrame {
 
         jLabel1.setText("Hi ! System Admin ");
 
-        jButton1.setText("Logout");
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -129,7 +134,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(logoutButton)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -138,7 +143,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1))
+                    .addComponent(logoutButton))
                 .addGap(11, 11, 11))
         );
 
@@ -178,6 +183,13 @@ public class SystemAdmin extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(manageEnterprise);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        // TODO add your handling code here:
+        MainFrame m = new MainFrame();
+                    m.setVisible(true);
+                    setVisible(false);
+    }//GEN-LAST:event_logoutButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -215,7 +227,6 @@ public class SystemAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -223,6 +234,7 @@ public class SystemAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel leftPanel;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JPanel rightPanel;
     // End of variables declaration//GEN-END:variables
 }

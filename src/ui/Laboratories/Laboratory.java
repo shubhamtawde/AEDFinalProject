@@ -77,6 +77,11 @@ public class Laboratory extends javax.swing.JFrame {
         createResearcherButton.setText("Create Researcher");
 
         monitorTestorButton.setText("Monitor Tester");
+        monitorTestorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monitorTestorButtonActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Monitor Researcher");
 
@@ -151,6 +156,12 @@ public class Laboratory extends javax.swing.JFrame {
         CreateTester createTester = new CreateTester();
         SplitPane.setRightComponent(createTester);
     }//GEN-LAST:event_createTesterButtonActionPerformed
+
+    private void monitorTestorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monitorTestorButtonActionPerformed
+        // TODO add your handling code here:
+         MonitorTester monitorTester = new MonitorTester();
+        SplitPane.setRightComponent(monitorTester);
+    }//GEN-LAST:event_monitorTestorButtonActionPerformed
 
     /**
      * @param args the command line arguments

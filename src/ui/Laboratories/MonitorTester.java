@@ -4,6 +4,14 @@
  */
 package ui.Laboratories;
 
+import Model.System.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author vidhisejpal
@@ -13,8 +21,11 @@ public class MonitorTester extends javax.swing.JPanel {
     /**
      * Creates new form MonitorTestor
      */
+     Connection dbConn = null;
+    PreparedStatement sqlStatement = null;
     public MonitorTester() {
         initComponents();
+         findTableData();
     }
 
     /**
@@ -41,17 +52,20 @@ public class MonitorTester extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id ", "Name", "Username", "Password"
+                "ID", "Organization ID", "Name", "Email", "Username", "Password", "License"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -64,10 +78,25 @@ public class MonitorTester extends javax.swing.JPanel {
         title.setText("Monitor Tester");
 
         viewButton.setText("View");
+        viewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewButtonActionPerformed(evt);
+            }
+        });
 
         updateButton.setText("Update");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
 
         deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Name : ");
 
@@ -99,7 +128,6 @@ public class MonitorTester extends javax.swing.JPanel {
                                 .addComponent(updateButton)
                                 .addGap(40, 40, 40)
                                 .addComponent(deleteButton))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(20, 20, 20)
@@ -111,8 +139,11 @@ public class MonitorTester extends javax.swing.JPanel {
                                 .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(149, Short.MAX_VALUE))
+                                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(243, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {deleteButton, updateButton, viewButton});
@@ -124,9 +155,9 @@ public class MonitorTester extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addComponent(title)
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(updateButton)
@@ -156,6 +187,278 @@ public class MonitorTester extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameActionPerformed
 
+    private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedRowIndex = jTable1.getSelectedRow();
+
+        if (jTable1.getSelectedRowCount() > 1) {
+            JOptionPane.showMessageDialog(this, "Please select only 1 row !");
+            return;
+        }
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select 1 row ");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            //Long id= Long.valueOf(TOOL_TIP_TEXT_KEY) model.getValueAt(selectedRowIndex,0);
+            String id = String.valueOf(model.getValueAt(selectedRowIndex, 0));
+            Long id_long = Long.valueOf(id);
+            System.out.println(id);
+            DatabaseConnection db = new DatabaseConnection();
+            ResultSet dbResult = null;
+            try {
+                dbConn = db.getConnection();
+                if (dbConn != null) {
+                    sqlStatement = dbConn.prepareStatement("select * from Tester where TesterId=?;");
+                    sqlStatement.setLong(1, id_long);
+
+                    dbResult = sqlStatement.executeQuery();
+
+                    //System.out.println(dbResult.next());
+                    //populateTable(dbResult);
+                    while (dbResult.next()) {
+
+                        name.setText(dbResult.getString(3));
+                        username.setText(dbResult.getString(5));
+                        password.setText(dbResult.getString(6));
+                       
+
+                    }
+
+                } else {
+                    System.out.println("connection not done");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            } finally {
+                if (sqlStatement != null) {
+                    try {
+                        if (!sqlStatement.isClosed()) {
+                            sqlStatement.close();
+                        }
+
+                    } catch (SQLException err) {
+                        err.printStackTrace();
+
+                    }
+                }
+                if (dbConn != null) {
+                    try {
+                        if (!dbConn.isClosed()) {
+                            db.closeConnection(dbConn);
+                        }
+                    } catch (SQLException err) {
+                        err.printStackTrace();
+
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_viewButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+        
+                int selectedRowIndex = jTable1.getSelectedRow();
+
+        if (jTable1.getSelectedRowCount() > 1) {
+            JOptionPane.showMessageDialog(this, "Please select only 1 row !");
+            return;
+        }
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select 1 row ");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            //Long id= Long.valueOf(TOOL_TIP_TEXT_KEY) model.getValueAt(selectedRowIndex,0);
+            String id = String.valueOf(model.getValueAt(selectedRowIndex, 0));
+            Long id_long = Long.valueOf(id);
+            System.out.println(id);
+            DatabaseConnection db = new DatabaseConnection();
+            ResultSet dbResult = null;
+            try {
+                dbConn = db.getConnection();
+                if (dbConn != null) {
+                    sqlStatement = dbConn.prepareStatement("delete from Tester where TesterId=?;");
+                    sqlStatement.setLong(1, id_long);
+
+                    int result = sqlStatement.executeUpdate();
+
+                    System.out.println(result);
+                    findTableData();
+                    //populateTable(dbResult);
+                } else {
+                    System.out.println("connection not done");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            } finally {
+                if (sqlStatement != null) {
+                    try {
+                        if (!sqlStatement.isClosed()) {
+                            sqlStatement.close();
+                        }
+
+                    } catch (SQLException err) {
+                        err.printStackTrace();
+
+                    }
+                }
+                if (dbConn != null) {
+                    try {
+                        if (!dbConn.isClosed()) {
+                            db.closeConnection(dbConn);
+                        }
+                    } catch (SQLException err) {
+                        err.printStackTrace();
+
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = jTable1.getSelectedRow();
+
+        if (jTable1.getSelectedRowCount() > 1) {
+            JOptionPane.showMessageDialog(this, "Please select only 1 row !");
+            return;
+        }
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select 1 row ");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            //Long id= Long.valueOf(TOOL_TIP_TEXT_KEY) model.getValueAt(selectedRowIndex,0);
+            String id = String.valueOf(model.getValueAt(selectedRowIndex, 0));
+            Long id_long = Long.valueOf(id);
+            System.out.println(id);
+            DatabaseConnection db = new DatabaseConnection();
+            ResultSet dbResult = null;
+            try {
+                dbConn = db.getConnection();
+                if (dbConn != null) {
+                    sqlStatement = dbConn.prepareStatement("update Tester set TesterName=?,TesterUsername=?,TesterPassword=? where TesterId=?;");
+                    
+                    
+                    sqlStatement.setString(1, name.getText());
+                    sqlStatement.setString(2, username.getText());
+                    sqlStatement.setString(3, password.getText());
+                    sqlStatement.setLong(4, id_long);
+
+                   int result = sqlStatement.executeUpdate();
+
+                    //System.out.println(dbResult.next());
+                    //populateTable(dbResult);
+                   
+                    findTableData();
+                    name.setText("");
+                    username.setText("");
+                    password.setText("");
+                 
+                } else {
+                    System.out.println("connection not done");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            } finally {
+                if (sqlStatement != null) {
+                    try {
+                        if (!sqlStatement.isClosed()) {
+                            sqlStatement.close();
+                        }
+
+                    } catch (SQLException err) {
+                        err.printStackTrace();
+
+                    }
+                }
+                if (dbConn != null) {
+                    try {
+                        if (!dbConn.isClosed()) {
+                            db.closeConnection(dbConn);
+                        }
+                    } catch (SQLException err) {
+                        err.printStackTrace();
+
+                    }
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_updateButtonActionPerformed
+
+        private void findTableData() {
+        DatabaseConnection db = new DatabaseConnection();
+        ResultSet dbResult = null;
+        try {
+            dbConn = db.getConnection();
+            if (dbConn != null) {
+                sqlStatement = dbConn.prepareStatement("select * from Tester;");
+
+                dbResult = sqlStatement.executeQuery();
+
+                //System.out.println(dbResult.next());
+               // System.out.println(dbResult.getLong(1));
+               populateTable(dbResult);
+
+            } else {
+                System.out.println("connection not done");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (sqlStatement != null) {
+                try {
+                    if (!sqlStatement.isClosed()) {
+                        sqlStatement.close();
+                    }
+
+                } catch (SQLException err) {
+                    err.printStackTrace();
+
+                }
+            }
+            if (dbConn != null) {
+                try {
+                    if (!dbConn.isClosed()) {
+                        db.closeConnection(dbConn);
+                    }
+                } catch (SQLException err) {
+                    err.printStackTrace();
+
+                }
+            }
+        }
+        }
+        
+     private void populateTable(ResultSet dbResult) 
+     {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        try {
+            while (dbResult.next()) {
+                Object[] row = new Object[7];
+                row[0] = dbResult.getLong(1);
+                row[1] = dbResult.getLong(2);
+                row[2] = dbResult.getString(3);
+                row[3] = dbResult.getString(4);
+                row[4] = dbResult.getString(5);
+                row[5] = dbResult.getString(6);
+                row[6] = dbResult.getString(7);
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;

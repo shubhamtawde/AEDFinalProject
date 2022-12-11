@@ -43,10 +43,13 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="758" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" min="-2" pref="758" max="-2" attributes="0"/>
+                          <Component id="upvoteButton" min="-2" pref="152" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="22" max="32767" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -69,7 +72,9 @@
               <Component id="searchButton" min="-2" pref="37" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="228" max="-2" attributes="0"/>
-              <EmptySpace pref="65" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Component id="upvoteButton" min="-2" pref="42" max="-2" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -137,7 +142,7 @@
                 <Column editable="false" title="Research Description" type="java.lang.Object"/>
                 <Column editable="false" title="Lead Scientist" type="java.lang.Object"/>
                 <Column editable="false" title="Collabrators" type="java.lang.Object"/>
-                <Column editable="false" title="Verify" type="java.lang.Object"/>
+                <Column editable="false" title="Upvote" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -186,5 +191,13 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="upvoteButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Upvote"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="upvoteButtonActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

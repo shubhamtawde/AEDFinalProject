@@ -174,6 +174,8 @@ public class ResearchAdmin extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+                MonitorResearcher monitorResearcher = new MonitorResearcher();
+        jSplitPane1.setRightComponent(monitorResearcher);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

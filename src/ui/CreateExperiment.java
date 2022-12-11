@@ -219,7 +219,7 @@ public class CreateExperiment extends javax.swing.JPanel {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-          if(ExperimentName.getText().isEmpty() || observation.getText().isEmpty() || photoLocation.isEmpty()
+          if(ExperimentName.getText().isEmpty() || observation.getText().isEmpty() || uploadImage.getText().equals("Upload")
                 || pstatement.getText().isEmpty() || hypo.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(this, "Please fill Atleast all Attributes");
@@ -232,7 +232,7 @@ public class CreateExperiment extends javax.swing.JPanel {
             dbConn = db.getConnection();
             if (dbConn != null) {
                 dbConn.setAutoCommit(false);
-                sqlStatement = dbConn.prepareStatement("INSERT INTO Experiments" + " VALUES " + " (?,?,?,?,?,?,?,?); ");
+                sqlStatement = dbConn.prepareStatement("INSERT INTO Experiments" + " VALUES " + " (?,?,?,?,?,?,?,?,?); ");
                
                 Long expid = (long) (Math.random() * (9999 - 1) + 1);
                 sqlStatement.setLong(1, expid);
@@ -258,14 +258,12 @@ public class CreateExperiment extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-            if (sqlStatement != null && sqlStatement1 != null ) {
+            if (sqlStatement != null ) {
                 try {
                     if (!sqlStatement.isClosed()) {
                         sqlStatement.close();
                     }
-                    if (!sqlStatement1.isClosed()) {
-                        sqlStatement1.close();
-                    }
+                    
                 } catch (SQLException err) {
                     err.printStackTrace();
                     

@@ -13,8 +13,10 @@ public class ResearcherPanel extends javax.swing.JFrame {
     /**
      * Creates new form ResearcherPanel
      */
+    public Long id;
     public ResearcherPanel() {
         initComponents();
+        
     }
 
     /**
@@ -136,6 +138,9 @@ public class ResearcherPanel extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+         CreateExperiment createExperiment = new CreateExperiment();
+         createExperiment.id = id;
+        jSplitPane1.setRightComponent(createExperiment);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed

@@ -193,7 +193,7 @@
           <Color blue="d3" green="76" red="19" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Hi ! Univeristy Admin"/>
+        <Property name="text" type="java.lang.String" value="Create Tester"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">

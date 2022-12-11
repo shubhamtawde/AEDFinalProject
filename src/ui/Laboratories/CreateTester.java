@@ -86,7 +86,7 @@ public class CreateTester extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(25, 118, 211));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Hi ! Univeristy Admin");
+        jLabel5.setText("Create Tester");
 
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(25, 118, 211));

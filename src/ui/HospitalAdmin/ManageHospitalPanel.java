@@ -402,7 +402,7 @@ public class ManageHospitalPanel extends javax.swing.JPanel {
         Connection dbConn = null;
         PreparedStatement hospStatement = null;
 
-        String hospQuery = "DELETE FROM book_info WHERE book_id =  ?;";
+        String hospQuery = "DELETE FROM project.hospital WHERE hospitalId =  ?;";
 
         Hospital hosp = new Hospital();
         hosp.setHospitalId(Long.valueOf(hospId.getText()));

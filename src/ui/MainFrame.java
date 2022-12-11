@@ -142,6 +142,18 @@ public class MainFrame extends javax.swing.JFrame {
                     ResearchAdmin researchAdmin = new ResearchAdmin(dbResult.getLong(1));
                     researchAdmin.setVisible(true);
                     setVisible(false);
+                    
+                }
+                else if(dbResult.getString(4).equals("Researcher")){
+                 
+                    logger.info("inside uni if");
+                    
+                     
+                    ResearcherPanel researchPanel = new ResearcherPanel();
+                    researchPanel.id = dbResult.getLong(1);
+                    researchPanel.setVisible(true);
+                    setVisible(false);
+                    
                 }
             } else {
                 System.out.println("connection not done");

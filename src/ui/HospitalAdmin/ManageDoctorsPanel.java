@@ -8,7 +8,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Doctor.Doctor;
+import model.Hospital.Hospital;
 import model.System.DatabaseConnection;
 
 /**
@@ -39,15 +43,15 @@ public class ManageDoctorsPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         docId = new javax.swing.JTextField();
         docName = new javax.swing.JTextField();
-        createDocBtn = new javax.swing.JButton();
-        docUserName = new javax.swing.JTextField();
+        updDocBtn = new javax.swing.JButton();
+        hospName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        docPassword = new javax.swing.JPasswordField();
         jScrollPane1 = new javax.swing.JScrollPane();
         doctorTable = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        docViewBtn = new javax.swing.JButton();
+        deleteDocBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 153, 255));
 
@@ -55,11 +59,13 @@ public class ManageDoctorsPanel extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Doctor ID");
 
-        createDocBtn.setText("Create Doctor");
-        createDocBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        createDocBtn.addActionListener(new java.awt.event.ActionListener() {
+        docId.setEditable(false);
+
+        updDocBtn.setText("Update Doctor");
+        updDocBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        updDocBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createDocBtnActionPerformed(evt);
+                updDocBtnActionPerformed(evt);
             }
         });
 
@@ -75,7 +81,7 @@ public class ManageDoctorsPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Doctor ID", "Doctor Name", "Hospital"
+                "Doctor Name", "Doctor ID", "Hospital Name"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -94,51 +100,58 @@ public class ManageDoctorsPanel extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Doctor Name");
 
-        jLabel7.setFont(new java.awt.Font("Monaco", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Password");
-
         jLabel8.setFont(new java.awt.Font("Monaco", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Username");
+        jLabel8.setText("Hospital Name");
+
+        docViewBtn.setText("View");
+        docViewBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                docViewBtnActionPerformed(evt);
+            }
+        });
+
+        deleteDocBtn.setText("Delete Doctor");
+        deleteDocBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteDocBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(257, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(258, 258, 258))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(258, 258, 258))
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(271, 271, 271)
+                        .addComponent(docViewBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4))
                         .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(docId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(docName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(62, 62, 62)
+                            .addComponent(docName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(updDocBtn))
+                        .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(deleteDocBtn)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(jLabel8)
-                                    .addComponent(jLabel7))
-                                .addGap(131, 131, 131))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(docUserName)
-                                .addComponent(docPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(232, 232, 232))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(262, 262, 262)
-                        .addComponent(createDocBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(131, 131, 131))
+                                .addComponent(hospName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -148,7 +161,9 @@ public class ManageDoctorsPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(133, 133, 133)
+                .addGap(18, 18, 18)
+                .addComponent(docViewBtn)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -159,15 +174,14 @@ public class ManageDoctorsPanel extends javax.swing.JPanel {
                     .addComponent(docName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(docUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hospName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(docPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))))
-                .addGap(40, 40, 40)
-                .addComponent(createDocBtn)
-                .addContainerGap(83, Short.MAX_VALUE))
+                        .addGap(52, 52, 52)))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(updDocBtn)
+                    .addComponent(deleteDocBtn))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -220,51 +234,73 @@ public class ManageDoctorsPanel extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private void fillTable(ResultSet dbResult) throws SQLException {
         DefaultTableModel tableModel = (DefaultTableModel) doctorTable.getModel();
 
         tableModel.setRowCount(0);
 
         do {
+            Doctor doc = new Doctor();
+            doc.setDoctorId(dbResult.getLong(1));
+            doc.setDoctorName(dbResult.getString(2));
+            doc.setHospitalName(dbResult.getString(3));
             Object[] tblRow = new Object[3];
-            tblRow[0] = dbResult.getLong(1);
-            tblRow[1] = dbResult.getString(2);
-            tblRow[2] = dbResult.getString(3);
+            tblRow[0] = doc;
+            tblRow[1] = doc.getDoctorId();
+            tblRow[2] = doc.getHospitalName();
             tableModel.addRow(tblRow);
-        }while(dbResult.next());
+        } while (dbResult.next());
     }
-    
-    
-    private void createDocBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createDocBtnActionPerformed
+
+
+    private void updDocBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updDocBtnActionPerformed
         // TODO add your handling code here:
+        if (docName.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Enter valid input!");
+            return;
+        }
+
+        if (Pattern.matches("^[0-9]*$", docName.getText())) {
+            JOptionPane.showMessageDialog(this, "Name cannot contain numbers!");
+            return;
+        }
+
+        if (hospName.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Enter valid input!");
+            return;
+        }
+
+        if (Pattern.matches("^[0-9]*$", hospName.getText())) {
+            JOptionPane.showMessageDialog(this, "Name cannot contain numbers!");
+            return;
+        }
+
         Connection dbConn = null;
         PreparedStatement docStatement = null;
-        PreparedStatement userStatement = null;
-        Long docId = (long) (Math.random() * (9999 - 1) + 1);
-        Long userId = (long) (Math.random() * (9999 - 1) + 1);
-        String docQuery = "INSERT INTO project.doctors VALUES  (?, ?, ?);";
-        String userQuery = "INSERT INTO project.credentials VALUES (?, ?, ?, ?);";
-
+        String updQuery = "UPDATE project.doctors SET doctorName = ?, hospitalName = ? WHERE doctorId = ?;";
+        Doctor doc = new Doctor();
+        doc.setDoctorId(Long.valueOf(docId.getText()));
+        doc.setDoctorName(docName.getText());
+        doc.setHospitalName(hospName.getText());
+        
         try {
             dbConn = db.getConnection();
             if (dbConn != null) {
-                dbConn.setAutoCommit(false);
-                docStatement = dbConn.prepareStatement(docQuery);
-                userStatement = dbConn.prepareStatement(userQuery);
-                docStatement.setLong(1, docId);
-                docStatement.setString(2, docName.getText());
-                docStatement.setString(3, "Hospital");
 
-                userStatement.setLong(1, userId);
-                userStatement.setString(2, docUserName.getText());
-                userStatement.setString(3, String.valueOf(docPassword.getPassword()));
-                userStatement.setString(4, "Doctor");
-                if ((docStatement.executeUpdate() > 0) && userStatement.executeUpdate() > 0) {
-                    System.out.println("Created Doctor Successfully!");
+                dbConn.setAutoCommit(false);
+                docStatement = dbConn.prepareStatement(updQuery);
+                docStatement.setLong(1, doc.getDoctorId());
+                docStatement.setString(2, doc.getDoctorName());
+                docStatement.setString(3, doc.getHospitalName());
+
+                if (docStatement.executeUpdate() > 0) {
+                    System.out.println("Updated Doctor Successfully!");
+                    JOptionPane.showMessageDialog(this, "Update doctor successfully!");
                     dbConn.commit();
                 } else {
-                    System.out.println("Failed to create doctor");
+                    System.out.println("Failed to update doctor");
+                    JOptionPane.showMessageDialog(this, "Failed to update doctor!");
                     dbConn.rollback();
                 }
             } else {
@@ -294,25 +330,53 @@ public class ManageDoctorsPanel extends javax.swing.JPanel {
                     }
                 } catch (SQLException err) {
                     err.printStackTrace();
-
                 }
             }
         }
-    }//GEN-LAST:event_createDocBtnActionPerformed
+    }//GEN-LAST:event_updDocBtnActionPerformed
 
+    private void docViewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_docViewBtnActionPerformed
+        // TODO add your handling code here:
+        int rowIndex = doctorTable.getSelectedRow();
+
+        if (rowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a doctor to update!");
+            return;
+        }
+
+        if (doctorTable.getSelectedRowCount() > 1) {
+            JOptionPane.showMessageDialog(this, "Please select only 1 doctor to update!");
+            return;
+        }
+
+        DefaultTableModel tableModel = (DefaultTableModel) doctorTable.getModel();
+        Doctor toUpdDoctor = (Doctor) tableModel.getValueAt(rowIndex, 0);
+
+        showDoctor(toUpdDoctor);
+    }//GEN-LAST:event_docViewBtnActionPerformed
+
+    private void deleteDocBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDocBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteDocBtnActionPerformed
+
+    private void showDoctor(Doctor toUpdDoctor) {
+        docId.setText(String.valueOf(toUpdDoctor.getDoctorId()));
+        docName.setText(toUpdDoctor.getDoctorName());
+        hospName.setText(toUpdDoctor.getHospitalName());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton createDocBtn;
+    private javax.swing.JButton deleteDocBtn;
     private javax.swing.JTextField docId;
     private javax.swing.JTextField docName;
-    private javax.swing.JPasswordField docPassword;
-    private javax.swing.JTextField docUserName;
+    private javax.swing.JButton docViewBtn;
     private javax.swing.JTable doctorTable;
+    private javax.swing.JTextField hospName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton updDocBtn;
     // End of variables declaration//GEN-END:variables
 }

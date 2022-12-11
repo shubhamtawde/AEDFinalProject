@@ -4,6 +4,21 @@
  */
 package ui;
 
+import Model.system.DatabaseConnection;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author siddharthvaghela
@@ -14,8 +29,12 @@ public class ViewExperiment extends javax.swing.JPanel {
      * Creates new form ViewExperiment
      */
     public Long id;
+    Connection dbConn = null;
+    PreparedStatement sqlStatement = null;
+
     public ViewExperiment() {
         initComponents();
+        findTableData();
     }
 
     /**
@@ -37,6 +56,9 @@ public class ViewExperiment extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         observation = new javax.swing.JTextPane();
         uploadImage = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -65,6 +87,34 @@ public class ViewExperiment extends javax.swing.JPanel {
 
         uploadImage.setText("Upload");
 
+        jButton4.setText("View Image");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+
+        jLabel3.setText("jLabel3");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(jLabel3)
+                .addContainerGap(278, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel3)
+                .addContainerGap(124, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,17 +133,20 @@ public class ViewExperiment extends javax.swing.JPanel {
                                 .addComponent(jLabel1)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(jButton2)
-                                .addGap(32, 32, 32)
-                                .addComponent(jButton3))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(uploadImage)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(34, 34, 34)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(63, 63, 63)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jButton2)
+                                .addGap(32, 32, 32)
+                                .addComponent(jButton3)
+                                .addGap(26, 26, 26)
+                                .addComponent(jButton4)))))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,26 +157,169 @@ public class ViewExperiment extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(40, 40, 40)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(uploadImage))
-                .addContainerGap(99, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(uploadImage)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
 
+        int rowIndex = jTable1.getSelectedRow();
+        if (rowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select row to view photo!");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        //Long id= Long.valueOf(TOOL_TIP_TEXT_KEY) model.getValueAt(selectedRowIndex,0);
+        String id = String.valueOf(model.getValueAt(rowIndex, 0));
+        Long id_long = Long.valueOf(id);
+
+        DatabaseConnection db = new DatabaseConnection();
+        ResultSet dbResult = null;
+        try {
+            dbConn = db.getConnection();
+            if (dbConn != null) {
+                sqlStatement = dbConn.prepareStatement("select * from Experiments where experimentid=?;");
+                sqlStatement.setLong(1, id_long);
+
+                dbResult = sqlStatement.executeQuery();
+
+                dbResult.next();
+             
+
+                JDialog viewDialog = new JDialog();
+                viewDialog.setSize(700, 450);
+                viewDialog.setLocation(300, 300);
+                viewDialog.setVisible(true);
+                JLabel imageLbl = new JLabel();
+                try {
+                    BufferedImage img = ImageIO.read(new File(dbResult.getString(8)));
+                    ImageIcon icon = new ImageIcon(img);
+                    imageLbl.setIcon(icon);
+                } catch (IOException exp) {
+                    System.out.println("Error occured : " + exp);
+                }
+                viewDialog.add(imageLbl);
+            } else {
+                System.out.println("connection not done");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (sqlStatement != null) {
+                try {
+                    if (!sqlStatement.isClosed()) {
+                        sqlStatement.close();
+                    }
+
+                } catch (SQLException err) {
+                    err.printStackTrace();
+
+                }
+            }
+            if (dbConn != null) {
+                try {
+                    if (!dbConn.isClosed()) {
+                        db.closeConnection(dbConn);
+                    }
+                } catch (SQLException err) {
+                    err.printStackTrace();
+
+                }
+            }
+        }
+
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void findTableData() {
+        DatabaseConnection db = new DatabaseConnection();
+        ResultSet dbResult = null;
+        try {
+            dbConn = db.getConnection();
+            if (dbConn != null) {
+                sqlStatement = dbConn.prepareStatement("select * from Experiments where researchId = ?;");
+                sqlStatement.setLong(1, id);
+                dbResult = sqlStatement.executeQuery();
+
+                //System.out.println(dbResult.next());
+                populateTable(dbResult);
+
+            } else {
+                System.out.println("connection not done");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (sqlStatement != null) {
+                try {
+                    if (!sqlStatement.isClosed()) {
+                        sqlStatement.close();
+                    }
+
+                } catch (SQLException err) {
+                    err.printStackTrace();
+
+                }
+            }
+            if (dbConn != null) {
+                try {
+                    if (!dbConn.isClosed()) {
+                        db.closeConnection(dbConn);
+                    }
+                } catch (SQLException err) {
+                    err.printStackTrace();
+
+                }
+            }
+        }
+    }
+
+    private void populateTable(ResultSet dbResult) {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        try {
+            while (dbResult.next()) {
+                Object[] row = new Object[8];
+                row[0] = dbResult.getInt(1);
+                row[1] = dbResult.getString(2);
+                row[2] = dbResult.getString(3);
+                row[3] = dbResult.getString(4);
+                row[4] = dbResult.getString(5);
+                row[5] = dbResult.getString(6);
+                row[6] = dbResult.getString(7);
+                row[7] = dbResult.getString(8);
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;

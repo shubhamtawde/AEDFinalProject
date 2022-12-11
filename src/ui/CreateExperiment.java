@@ -4,7 +4,11 @@
  */
 package ui;
 
+import Model.system.DatabaseConnection;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -18,6 +22,10 @@ public class CreateExperiment extends javax.swing.JPanel {
     /**
      * Creates new form CreateExperiment
      */
+    Connection dbConn = null;
+    public Long id;
+    PreparedStatement sqlStatement = null;
+     PreparedStatement sqlStatement1 = null;
     public String photoLocation; 
     public CreateExperiment() {
         initComponents();
@@ -42,16 +50,18 @@ public class CreateExperiment extends javax.swing.JPanel {
         pstatement = new javax.swing.JTextPane();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        Objective1 = new javax.swing.JTextPane();
+        Objective = new javax.swing.JTextPane();
         Hypothesis = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        pstatement1 = new javax.swing.JTextPane();
+        hypo = new javax.swing.JTextPane();
         Hypothesis1 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         observation = new javax.swing.JTextPane();
         Hypothesis2 = new javax.swing.JLabel();
         uploadImage = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        scientistname = new javax.swing.JTextField();
 
         jLabel1.setText("Create Experiment");
 
@@ -65,11 +75,11 @@ public class CreateExperiment extends javax.swing.JPanel {
 
         jLabel4.setText("Problem Statement:");
 
-        jScrollPane2.setViewportView(Objective1);
+        jScrollPane2.setViewportView(Objective);
 
         Hypothesis.setText("Hypothesis:");
 
-        jScrollPane3.setViewportView(pstatement1);
+        jScrollPane3.setViewportView(hypo);
 
         Hypothesis1.setText("Observation:");
 
@@ -85,6 +95,13 @@ public class CreateExperiment extends javax.swing.JPanel {
         });
 
         saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Scientist Name:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -102,21 +119,21 @@ public class CreateExperiment extends javax.swing.JPanel {
                             .addComponent(jLabel3)
                             .addComponent(jLabel2))
                         .addGap(46, 46, 46)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                             .addComponent(uploadImage)
-                            .addComponent(ExperimentName, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(ExperimentName, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2))
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel5)
+                        .addGap(29, 29, 29)
+                        .addComponent(scientistname, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(276, 276, 276)
                         .addComponent(saveButton)))
-                .addContainerGap(633, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(210, 210, 210)
-                    .addComponent(jScrollPane2)
-                    .addGap(156, 156, 156)))
+                .addContainerGap(337, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,10 +141,14 @@ public class CreateExperiment extends javax.swing.JPanel {
                 .addGap(45, 45, 45)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(ExperimentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ExperimentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(scientistname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addComponent(jLabel3)
-                .addGap(83, 83, 83)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -147,11 +168,6 @@ public class CreateExperiment extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(saveButton)
                 .addGap(59, 59, 59))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(104, 104, 104)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(465, Short.MAX_VALUE)))
         );
 
         jScrollPane5.setViewportView(jPanel2);
@@ -201,17 +217,90 @@ public class CreateExperiment extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_uploadImageActionPerformed
 
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+          if(ExperimentName.getText().isEmpty() || observation.getText().isEmpty() || photoLocation.isEmpty()
+                || pstatement.getText().isEmpty() || hypo.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Please fill Atleast all Attributes");
+              return;
+        }
+        
+         DatabaseConnection db = new DatabaseConnection();
+
+        try {
+            dbConn = db.getConnection();
+            if (dbConn != null) {
+                dbConn.setAutoCommit(false);
+                sqlStatement = dbConn.prepareStatement("INSERT INTO Experiments" + " VALUES " + " (?,?,?,?,?,?,?,?); ");
+               
+                Long expid = (long) (Math.random() * (9999 - 1) + 1);
+                sqlStatement.setLong(1, expid);
+                sqlStatement.setLong(2, id);
+                sqlStatement.setString(3, ExperimentName.getText());
+                sqlStatement.setString(4, Objective.getText());
+                sqlStatement.setString(5, pstatement.getText());
+                sqlStatement.setString(6, hypo.getText());
+                sqlStatement.setString(7, observation.getText());
+                sqlStatement.setString(8, photoLocation);
+                sqlStatement.setInt(9, 0);
+                
+                
+                if (sqlStatement.executeUpdate() > 0 ) {
+                    System.out.println("commited");
+                    dbConn.commit();
+                } else {
+                    System.out.println("not commited");
+                }
+            } else {
+                System.out.println("connection not done");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (sqlStatement != null && sqlStatement1 != null ) {
+                try {
+                    if (!sqlStatement.isClosed()) {
+                        sqlStatement.close();
+                    }
+                    if (!sqlStatement1.isClosed()) {
+                        sqlStatement1.close();
+                    }
+                } catch (SQLException err) {
+                    err.printStackTrace();
+                    
+                }
+            }
+            if (dbConn != null) {
+                try {
+                    if (!dbConn.isClosed()) {
+                        db.closeConnection(dbConn);
+                    }
+                } catch (SQLException err) {
+                    err.printStackTrace();
+                   
+                }
+            }
+        }
+
+
+  
+          
+    }//GEN-LAST:event_saveButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ExperimentName;
     private javax.swing.JLabel Hypothesis;
     private javax.swing.JLabel Hypothesis1;
     private javax.swing.JLabel Hypothesis2;
-    private javax.swing.JTextPane Objective1;
+    private javax.swing.JTextPane Objective;
+    private javax.swing.JTextPane hypo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -220,8 +309,8 @@ public class CreateExperiment extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextPane observation;
     private javax.swing.JTextPane pstatement;
-    private javax.swing.JTextPane pstatement1;
     private javax.swing.JButton saveButton;
+    private javax.swing.JTextField scientistname;
     private javax.swing.JButton uploadImage;
     // End of variables declaration//GEN-END:variables
 }

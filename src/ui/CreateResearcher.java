@@ -171,7 +171,7 @@ public class CreateResearcher extends javax.swing.JPanel {
                 sqlStatement1.setLong(1, id);
                 sqlStatement1.setString(2, userName.getText());
                 sqlStatement1.setString(3, String.valueOf(password.getPassword()));
-                sqlStatement1.setString(4, "Pharma Admin");
+                sqlStatement1.setString(4, "Researcher");
                 sqlStatement1.setString(5, license);
                 
 

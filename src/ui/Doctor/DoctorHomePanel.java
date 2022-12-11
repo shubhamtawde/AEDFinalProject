@@ -15,6 +15,7 @@ import javax.swing.border.LineBorder;
 public class DoctorHomePanel extends javax.swing.JFrame {
 
     public Long id = 0L;
+
     /**
      * Creates new form HospitalAdminHome
      */
@@ -35,31 +36,32 @@ public class DoctorHomePanel extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel2 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        docReqTestResultBtn = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        docMonitorTestResult = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         logoutBtn = new javax.swing.JButton();
+        homeBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
-        jPanel4.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        docReqTestResultBtn.setBackground(new java.awt.Color(102, 102, 102));
+        docReqTestResultBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        docReqTestResultBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel4MouseClicked(evt);
+                docReqTestResultBtnMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel4MouseExited(evt);
+                docReqTestResultBtnMouseExited(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel4MouseEntered(evt);
+                docReqTestResultBtnMouseEntered(evt);
             }
         });
 
@@ -67,34 +69,34 @@ public class DoctorHomePanel extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Request Test Result");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout docReqTestResultBtnLayout = new javax.swing.GroupLayout(docReqTestResultBtn);
+        docReqTestResultBtn.setLayout(docReqTestResultBtnLayout);
+        docReqTestResultBtnLayout.setHorizontalGroup(
+            docReqTestResultBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(docReqTestResultBtnLayout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(jLabel7)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        docReqTestResultBtnLayout.setVerticalGroup(
+            docReqTestResultBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(docReqTestResultBtnLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jPanel6.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        docMonitorTestResult.setBackground(new java.awt.Color(102, 102, 102));
+        docMonitorTestResult.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        docMonitorTestResult.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel6MouseClicked(evt);
+                docMonitorTestResultMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel6MouseExited(evt);
+                docMonitorTestResultMouseExited(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel6MouseEntered(evt);
+                docMonitorTestResultMouseEntered(evt);
             }
         });
 
@@ -102,18 +104,18 @@ public class DoctorHomePanel extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Monitor Test Result");
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout docMonitorTestResultLayout = new javax.swing.GroupLayout(docMonitorTestResult);
+        docMonitorTestResult.setLayout(docMonitorTestResultLayout);
+        docMonitorTestResultLayout.setHorizontalGroup(
+            docMonitorTestResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(docMonitorTestResultLayout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(jLabel8)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        docMonitorTestResultLayout.setVerticalGroup(
+            docMonitorTestResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(docMonitorTestResultLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addContainerGap(15, Short.MAX_VALUE))
@@ -126,17 +128,17 @@ public class DoctorHomePanel extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(docReqTestResultBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(docMonitorTestResult, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(136, 136, 136)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(docReqTestResultBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(docMonitorTestResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(479, Short.MAX_VALUE))
         );
 
@@ -146,23 +148,23 @@ public class DoctorHomePanel extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Doctor Home");
+        jLabel5.setText("Doctor Home Panel");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(177, 177, 177)
+                .addGap(192, 192, 192)
                 .addComponent(jLabel5)
-                .addContainerGap(324, Short.MAX_VALUE))
+                .addContainerGap(309, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(54, 54, 54)
                 .addComponent(jLabel5)
-                .addContainerGap(638, Short.MAX_VALUE))
+                .addContainerGap(637, Short.MAX_VALUE))
         );
 
         jSplitPane1.setRightComponent(jPanel3);
@@ -175,6 +177,13 @@ public class DoctorHomePanel extends javax.swing.JFrame {
 
         logoutBtn.setText("Logout");
 
+        homeBtn.setText("Home");
+        homeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homeBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -183,6 +192,8 @@ public class DoctorHomePanel extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(homeBtn)
+                .addGap(348, 348, 348)
                 .addComponent(logoutBtn)
                 .addGap(17, 17, 17))
         );
@@ -192,7 +203,8 @@ public class DoctorHomePanel extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(logoutBtn))
+                    .addComponent(logoutBtn)
+                    .addComponent(homeBtn))
                 .addGap(14, 14, 14))
         );
 
@@ -215,7 +227,7 @@ public class DoctorHomePanel extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 877, Short.MAX_VALUE)
+            .addGap(0, 927, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -235,34 +247,40 @@ public class DoctorHomePanel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseExited
+    private void docReqTestResultBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_docReqTestResultBtnMouseExited
         // TODO add your handling code here:
-        jPanel4.setBorder(null);
-    }//GEN-LAST:event_jPanel4MouseExited
+        docReqTestResultBtn.setBorder(null);
+    }//GEN-LAST:event_docReqTestResultBtnMouseExited
 
-    private void jPanel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseEntered
+    private void docReqTestResultBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_docReqTestResultBtnMouseEntered
         // TODO add your handling code here:
-        jPanel4.setBorder(new LineBorder(Color.CYAN, 2));
-    }//GEN-LAST:event_jPanel4MouseEntered
+        docReqTestResultBtn.setBorder(new LineBorder(Color.CYAN, 2));
+    }//GEN-LAST:event_docReqTestResultBtnMouseEntered
 
-    private void jPanel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseExited
+    private void docMonitorTestResultMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_docMonitorTestResultMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel6MouseExited
+    }//GEN-LAST:event_docMonitorTestResultMouseExited
 
-    private void jPanel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseEntered
+    private void docMonitorTestResultMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_docMonitorTestResultMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel6MouseEntered
+    }//GEN-LAST:event_docMonitorTestResultMouseEntered
 
-    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+    private void docReqTestResultBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_docReqTestResultBtnMouseClicked
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jPanel4MouseClicked
+        RequestTestResult req = new RequestTestResult();
+        jSplitPane1.setRightComponent(req);
+    }//GEN-LAST:event_docReqTestResultBtnMouseClicked
 
-    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+    private void docMonitorTestResultMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_docMonitorTestResultMouseClicked
         // TODO add your handling code here:
-         ManageDoctorsPanel doc = new ManageDoctorsPanel();
-         jSplitPane1.setRightComponent(doc);
-    }//GEN-LAST:event_jPanel6MouseClicked
+        RequestTestResult req = new RequestTestResult();
+        jSplitPane1.setRightComponent(req);
+    }//GEN-LAST:event_docMonitorTestResultMouseClicked
+
+    private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBtnActionPerformed
+        // TODO add your handling code here:
+        jSplitPane1.setRightComponent(jPanel3);
+    }//GEN-LAST:event_homeBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,6 +319,9 @@ public class DoctorHomePanel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel docMonitorTestResult;
+    private javax.swing.JPanel docReqTestResultBtn;
+    private javax.swing.JButton homeBtn;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -308,9 +329,7 @@ public class DoctorHomePanel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JButton logoutBtn;
     // End of variables declaration//GEN-END:variables

@@ -151,7 +151,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="d3" green="76" red="19" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Create Tester"/>
+                <Property name="text" type="java.lang.String" value="Request Collabration"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="requestCollabrationButtonActionPerformed"/>

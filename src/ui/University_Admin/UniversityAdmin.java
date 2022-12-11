@@ -74,7 +74,7 @@ public class UniversityAdmin extends javax.swing.JFrame {
 
         requestCollabrationButton.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         requestCollabrationButton.setForeground(new java.awt.Color(25, 118, 211));
-        requestCollabrationButton.setText("Create Tester");
+        requestCollabrationButton.setText("Request Collabration");
         requestCollabrationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 requestCollabrationButtonActionPerformed(evt);

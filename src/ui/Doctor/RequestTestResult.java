@@ -7,6 +7,7 @@ package ui.Doctor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import model.System.DatabaseConnection;
 
@@ -39,13 +40,11 @@ public class RequestTestResult extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         docId = new javax.swing.JTextField();
         docName = new javax.swing.JTextField();
         testName = new javax.swing.JTextField();
         patientName = new javax.swing.JTextField();
         date = new javax.swing.JTextField();
-        uploadSampleBtn = new javax.swing.JButton();
         reqTestResBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 153, 255));
@@ -74,17 +73,11 @@ public class RequestTestResult extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Date");
 
-        jLabel8.setFont(new java.awt.Font("Monaco", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Sample Upload");
-
         testName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 testNameActionPerformed(evt);
             }
         });
-
-        uploadSampleBtn.setText("Upload Sample");
 
         reqTestResBtn.setText("Request Test Result");
         reqTestResBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -98,16 +91,15 @@ public class RequestTestResult extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(293, Short.MAX_VALUE)
+                .addGap(36, 293, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(287, 287, 287))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(196, 196, 196)
+                        .addGap(204, 204, 204)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel8)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel6)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -115,14 +107,13 @@ public class RequestTestResult extends javax.swing.JPanel {
                                 .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(docId)
+                            .addComponent(docId, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                             .addComponent(docName)
                             .addComponent(testName)
                             .addComponent(patientName)
-                            .addComponent(date)
-                            .addComponent(uploadSampleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(date)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(289, 289, 289)
+                        .addGap(290, 290, 290)
                         .addComponent(reqTestResBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -151,13 +142,9 @@ public class RequestTestResult extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(uploadSampleBtn))
-                .addGap(49, 49, 49)
+                .addGap(60, 60, 60)
                 .addComponent(reqTestResBtn)
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -167,6 +154,36 @@ public class RequestTestResult extends javax.swing.JPanel {
 
     private void reqTestResBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reqTestResBtnActionPerformed
         // TODO add your handling code here:
+        if(docName.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Enter valid input!");
+            return;
+        }
+        
+        if (Pattern.matches("^[0-9]*$", docName.getText())) {
+            JOptionPane.showMessageDialog(this, "Name cannot contain numbers!");
+            return;
+        }
+        
+        if(testName.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Enter valid Test Name!");
+            return;
+        }
+        
+        if(patientName.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Enter valid patient name!");
+            return;
+        }
+        
+        if(Pattern.matches("^[0-9]*$", patientName.getText())) {
+            JOptionPane.showMessageDialog(this, "Name cannot contain numbers!");
+            return;
+        }
+        
+        if(date.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Enter valid date!");
+            return;
+        }
+        
         Connection dbConn = null;
         PreparedStatement sqlStatement = null;
         Long resId = (long) (Math.random() * (9999 - 1) + 1);
@@ -183,7 +200,7 @@ public class RequestTestResult extends javax.swing.JPanel {
                 sqlStatement.setString(4, testName.getText());
                 sqlStatement.setString(5, patientName.getText());
                 sqlStatement.setString(6, date.getText());
-                sqlStatement.setString(7, "SAMPLE");
+                sqlStatement.setString(7, "");
                 
                 if (sqlStatement.executeUpdate() > 0) {
                     JOptionPane.showMessageDialog(this, "Requested Test Result!");
@@ -238,10 +255,8 @@ public class RequestTestResult extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField patientName;
     private javax.swing.JButton reqTestResBtn;
     private javax.swing.JTextField testName;
-    private javax.swing.JButton uploadSampleBtn;
     // End of variables declaration//GEN-END:variables
 }

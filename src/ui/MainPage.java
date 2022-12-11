@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.System.DatabaseConnection;
 import model.User.User;
+import ui.Admin.AdminHomePanel;
+import ui.Doctor.DoctorHomePanel;
 import ui.HospitalAdmin.HospitalAdminHome;
 
 /**
@@ -151,6 +153,16 @@ public class MainPage extends javax.swing.JFrame {
                         HospitalAdminHome hosp = new HospitalAdminHome();
                         hosp.id = user.getUserId();
                         hosp.setVisible(true);
+                        setVisible(false);
+                    }
+                    else if(user.getRole().equals("Doctor")) {
+                        DoctorHomePanel doc = new DoctorHomePanel();
+                        doc.setVisible(true);
+                        setVisible(false);
+                    }
+                    else if(user.getRole().equals("Admin")) {
+                        AdminHomePanel admin = new AdminHomePanel();
+                        admin.setVisible(true);
                         setVisible(false);
                     }
                 }

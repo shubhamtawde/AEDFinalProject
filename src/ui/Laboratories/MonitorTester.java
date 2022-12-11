@@ -21,11 +21,12 @@ public class MonitorTester extends javax.swing.JPanel {
     /**
      * Creates new form MonitorTestor
      */
-     Connection dbConn = null;
+    Connection dbConn = null;
     PreparedStatement sqlStatement = null;
+
     public MonitorTester() {
         initComponents();
-         findTableData();
+        findTableData();
     }
 
     /**
@@ -189,7 +190,7 @@ public class MonitorTester extends javax.swing.JPanel {
 
     private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
         // TODO add your handling code here:
-        
+
         int selectedRowIndex = jTable1.getSelectedRow();
 
         if (jTable1.getSelectedRowCount() > 1) {
@@ -223,7 +224,6 @@ public class MonitorTester extends javax.swing.JPanel {
                         name.setText(dbResult.getString(3));
                         username.setText(dbResult.getString(5));
                         password.setText(dbResult.getString(6));
-                       
 
                     }
 
@@ -260,8 +260,8 @@ public class MonitorTester extends javax.swing.JPanel {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-        
-                int selectedRowIndex = jTable1.getSelectedRow();
+
+        int selectedRowIndex = jTable1.getSelectedRow();
 
         if (jTable1.getSelectedRowCount() > 1) {
             JOptionPane.showMessageDialog(this, "Please select only 1 row !");
@@ -345,23 +345,21 @@ public class MonitorTester extends javax.swing.JPanel {
                 dbConn = db.getConnection();
                 if (dbConn != null) {
                     sqlStatement = dbConn.prepareStatement("update Tester set TesterName=?,TesterUsername=?,TesterPassword=? where TesterId=?;");
-                    
-                    
+
                     sqlStatement.setString(1, name.getText());
                     sqlStatement.setString(2, username.getText());
                     sqlStatement.setString(3, password.getText());
                     sqlStatement.setLong(4, id_long);
 
-                   int result = sqlStatement.executeUpdate();
+                    int result = sqlStatement.executeUpdate();
 
                     //System.out.println(dbResult.next());
                     //populateTable(dbResult);
-                   
                     findTableData();
                     name.setText("");
                     username.setText("");
                     password.setText("");
-                 
+
                 } else {
                     System.out.println("connection not done");
                 }
@@ -391,10 +389,10 @@ public class MonitorTester extends javax.swing.JPanel {
                 }
             }
         }
-        
+
     }//GEN-LAST:event_updateButtonActionPerformed
 
-        private void findTableData() {
+    private void findTableData() {
         DatabaseConnection db = new DatabaseConnection();
         ResultSet dbResult = null;
         try {
@@ -405,8 +403,8 @@ public class MonitorTester extends javax.swing.JPanel {
                 dbResult = sqlStatement.executeQuery();
 
                 //System.out.println(dbResult.next());
-               // System.out.println(dbResult.getLong(1));
-               populateTable(dbResult);
+                // System.out.println(dbResult.getLong(1));
+                populateTable(dbResult);
 
             } else {
                 System.out.println("connection not done");
@@ -436,10 +434,9 @@ public class MonitorTester extends javax.swing.JPanel {
                 }
             }
         }
-        }
-        
-     private void populateTable(ResultSet dbResult) 
-     {
+    }
+
+    private void populateTable(ResultSet dbResult) {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         try {

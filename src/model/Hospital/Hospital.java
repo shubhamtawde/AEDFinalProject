@@ -10,17 +10,17 @@ package model.Hospital;
  */
 public class Hospital {
     
-    private String hospitalId;
+    private Long hospitalId;
     
     private String hospitalName;
     
     private String hospitalCity;
 
-    public String getHospitalId() {
+    public Long getHospitalId() {
         return hospitalId;
     }
 
-    public void setHospitalId(String hospitalId) {
+    public void setHospitalId(Long hospitalId) {
         this.hospitalId = hospitalId;
     }
 
@@ -42,7 +42,7 @@ public class Hospital {
 
     @Override
     public String toString() {
-        return hospitalId;
+        return hospitalName;
     }
     
     

@@ -9,7 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -23,7 +26,8 @@ public class MainFrame extends javax.swing.JFrame {
         Connection dbConn = null;
         ResultSet dbResult = null;
         PreparedStatement sqlStatement = null;
-
+        
+        Logger logger = LogManager.getLogger(MainFrame.class);
     public MainFrame() {
         initComponents();
     }
@@ -132,6 +136,8 @@ public class MainFrame extends javax.swing.JFrame {
                 }
                 else if(dbResult.getString(4).equals("University Admin")){
                     System.out.println("inside uni if");
+                    logger.info("inside uni if");
+                    logger.error("this is error messsage ");
                      
                     ResearchAdmin researchAdmin = new ResearchAdmin(dbResult.getLong(1));
                     researchAdmin.setVisible(true);

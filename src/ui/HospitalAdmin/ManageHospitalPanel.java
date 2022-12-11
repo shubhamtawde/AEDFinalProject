@@ -8,7 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Credentials.Credentials;
+import model.Doctor.Doctor;
+import model.Hospital.Hospital;
 import model.System.DatabaseConnection;
 
 /**
@@ -43,13 +48,11 @@ public class ManageHospitalPanel extends javax.swing.JPanel {
         hospId = new javax.swing.JTextField();
         hospName = new javax.swing.JTextField();
         hospCity = new javax.swing.JTextField();
-        createHospitalBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         hospitalTable = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
-        hospAdminUsername = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        hospAdminPassword = new javax.swing.JPasswordField();
+        viewHospBtn = new javax.swing.JButton();
+        updHospBtn = new javax.swing.JButton();
+        deleteHospBtn = new javax.swing.JButton();
 
         jLabel1.setText("Manage Hospital Panel");
 
@@ -59,12 +62,7 @@ public class ManageHospitalPanel extends javax.swing.JPanel {
 
         jLabel4.setText("Hospital City");
 
-        createHospitalBtn.setText("Create Hospital");
-        createHospitalBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createHospitalBtnActionPerformed(evt);
-            }
-        });
+        hospId.setEditable(false);
 
         hospitalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,7 +72,7 @@ public class ManageHospitalPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Hospital ID", "Hospital Name", "Hospital City"
+                "Hospital Name", "Hospital ID", "Hospital City"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -87,9 +85,26 @@ public class ManageHospitalPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(hospitalTable);
 
-        jLabel5.setText("Password");
+        viewHospBtn.setText("View");
+        viewHospBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewHospBtnActionPerformed(evt);
+            }
+        });
 
-        jLabel6.setText("Username");
+        updHospBtn.setText("Update Hospital");
+        updHospBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updHospBtnActionPerformed(evt);
+            }
+        });
+
+        deleteHospBtn.setText("Delete Hospital");
+        deleteHospBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteHospBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -97,39 +112,34 @@ public class ManageHospitalPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(22, 22, 22)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(47, 47, 47)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGap(52, 52, 52)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(hospCity, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(hospId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(hospName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addGap(52, 52, 52)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(hospAdminUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                        .addComponent(hospAdminPassword))
-                                    .addGap(104, 104, 104)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hospCity, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hospId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hospName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(335, 335, 335)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(333, 333, 333)
-                        .addComponent(createHospitalBtn)))
+                        .addGap(330, 330, 330)
+                        .addComponent(viewHospBtn)
+                        .addGap(89, 89, 89)))
                 .addContainerGap(21, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(updHospBtn)
+                .addGap(86, 86, 86)
+                .addComponent(deleteHospBtn)
+                .addGap(282, 282, 282))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,66 +147,96 @@ public class ManageHospitalPanel extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(viewHospBtn)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(hospId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel3))
-                            .addComponent(hospName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(hospAdminUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(hospAdminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel2)
+                            .addComponent(hospId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel3))
+                    .addComponent(hospName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(hospCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(createHospitalBtn)
-                .addGap(27, 27, 27))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(updHospBtn)
+                    .addComponent(deleteHospBtn))
+                .addGap(33, 33, 33))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void createHospitalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createHospitalBtnActionPerformed
+    private void viewHospBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewHospBtnActionPerformed
         // TODO add your handling code here:
+        int rowIndex = hospitalTable.getSelectedRow();
+
+        if (rowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select an employee to update!");
+            return;
+        }
+
+        if (hospitalTable.getSelectedRowCount() > 1) {
+            JOptionPane.showMessageDialog(this, "Please select only 1 employee to update!");
+            return;
+        }
+
+        DefaultTableModel tableModel = (DefaultTableModel) hospitalTable.getModel();
+        Hospital toUpdHospital = (Hospital) tableModel.getValueAt(rowIndex, 0);
+
+        showHospital(toUpdHospital);
+    }//GEN-LAST:event_viewHospBtnActionPerformed
+
+    private void updHospBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updHospBtnActionPerformed
+        // TODO add your handling code here:
+        if (hospName.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Enter valid input!");
+            return;
+        }
+
+        if (Pattern.matches("^[0-9]*$", hospName.getText())) {
+            JOptionPane.showMessageDialog(this, "Name cannot contain numbers!");
+            return;
+        }
+
+        if (hospCity.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Enter valid input!");
+            return;
+        }
+
+        if (Pattern.matches("^[0-9]*$", hospCity.getText())) {
+            JOptionPane.showMessageDialog(this, "Name cannot contain numbers!");
+            return;
+        }
+
         Connection dbConn = null;
-        PreparedStatement sqlStatement = null;
-        PreparedStatement userStatement = null;
-        Long hospitalId = (long) (Math.random() * (9999 - 1) + 1);
-        Long userId = (long) (Math.random() * (9999 - 1) + 1);
-        String sqlQuery = "INSERT INTO project.hospital VALUES  (?, ?, ?);";
-        String userQuery = "INSERT INTO project.credentials VALUES (?, ?, ?, ?);";
-        
+        PreparedStatement docStatement = null;
+        String updQuery = "UPDATE project.hospital SET hospitalName = ?, hospitalCity = ? WHERE hospitalId = ?;";
+
         try {
             dbConn = db.getConnection();
             if (dbConn != null) {
+                Hospital hosp = new Hospital();
+                hosp.setHospitalId(Long.valueOf(hospId.getText()));
+                hosp.setHospitalName(hospName.getText());
+                hosp.setHospitalCity(hospCity.getText());
                 dbConn.setAutoCommit(false);
-                sqlStatement = dbConn.prepareStatement(sqlQuery);
-                userStatement = dbConn.prepareStatement(userQuery);
-                sqlStatement.setLong(1, hospitalId);
-                sqlStatement.setString(2, hospName.getText());
-                sqlStatement.setString(3, hospCity.getText());
-                
-                userStatement.setLong(1, userId);
-                userStatement.setString(2, hospAdminUsername.getText());
-                userStatement.setString(3, String.valueOf(hospAdminPassword.getPassword()));
-                userStatement.setString(4, "Hospital Admin");
-                if ((sqlStatement.executeUpdate() > 0) && userStatement.executeUpdate() > 0) {
-                    System.out.println("Created Hospital Successfully!");
-                    System.out.println("Created Hospital Admin successfully!");
+                docStatement = dbConn.prepareStatement(updQuery);
+                docStatement.setString(1, hosp.getHospitalName());
+                docStatement.setString(2, hosp.getHospitalCity());
+                docStatement.setLong(3, hosp.getHospitalId());
+
+                if (docStatement.executeUpdate() > 0) {
+                    System.out.println("Updated Hospital Successfully!");
+                    JOptionPane.showMessageDialog(this, "Update Hospital Successfully!");
                     dbConn.commit();
                 } else {
-                    System.out.println("Failed to create hospital");
+                    System.out.println("Failed to update Hospital");
+                    JOptionPane.showMessageDialog(this, "Failed to update Hospital!");
                     dbConn.rollback();
                 }
             } else {
@@ -209,10 +249,10 @@ public class ManageHospitalPanel extends javax.swing.JPanel {
             exp.printStackTrace();
 
         } finally {
-            if (sqlStatement != null) {
+            if (docStatement != null) {
                 try {
-                    if (!sqlStatement.isClosed()) {
-                        sqlStatement.close();
+                    if (!docStatement.isClosed()) {
+                        docStatement.close();
                     }
                 } catch (SQLException err) {
                     err.printStackTrace();
@@ -226,12 +266,41 @@ public class ManageHospitalPanel extends javax.swing.JPanel {
                     }
                 } catch (SQLException err) {
                     err.printStackTrace();
-
                 }
             }
         }
+        clearFields();
+        populateTable();
+    }//GEN-LAST:event_updHospBtnActionPerformed
 
-    }//GEN-LAST:event_createHospitalBtnActionPerformed
+    private void deleteHospBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteHospBtnActionPerformed
+        // TODO add your handling code here:
+        int rowIndex = hospitalTable.getSelectedRow();
+
+        if (rowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a hospital to delete!");
+            return;
+        }
+
+        if (hospitalTable.getSelectedRowCount() > 1) {
+            JOptionPane.showMessageDialog(this, "Please select only 1 hospital to delete!");
+            return;
+        }
+
+        DefaultTableModel tableModel = (DefaultTableModel) hospitalTable.getModel();
+        Hospital toDelHospital = (Hospital) tableModel.getValueAt(rowIndex, 0);
+
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this Hospital;?", "Delete Hospital Confirmation", JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION) {
+            //delete employee
+            deleteHospital(toDelHospital);
+
+            JOptionPane.showMessageDialog(this, "Hospital Deleted Successfully!");
+            //populate table to refresh the deleted record
+            populateTable();
+        }
+
+    }//GEN-LAST:event_deleteHospBtnActionPerformed
 
     private void populateTable() {
         Connection dbConn = null;
@@ -245,7 +314,7 @@ public class ManageHospitalPanel extends javax.swing.JPanel {
                 sqlStatement = dbConn.prepareStatement(sqlQuery);
                 dbResult = sqlStatement.executeQuery();
                 System.out.println(dbResult);
-                if (dbResult == null) {
+                if (!dbResult.next()) {
                     System.out.println("Result set is null!");
                 } else {
                     fillTable(dbResult);
@@ -282,24 +351,39 @@ public class ManageHospitalPanel extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private void fillTable(ResultSet dbResult) throws SQLException {
         DefaultTableModel tableModel = (DefaultTableModel) hospitalTable.getModel();
 
         tableModel.setRowCount(0);
 
-        while(dbResult.next()) {
+        do {
+            Hospital hosp = new Hospital();
+            hosp.setHospitalId(dbResult.getLong(1));
+            hosp.setHospitalName(dbResult.getString(2));
+            hosp.setHospitalCity(dbResult.getString(3));
             Object[] tblRow = new Object[3];
-            tblRow[0] = dbResult.getLong(1);
-            tblRow[1] = dbResult.getString(2);
-            tblRow[2] = dbResult.getString(3);
+            tblRow[0] = hosp;
+            tblRow[1] = hosp.getHospitalId();
+            tblRow[2] = hosp.getHospitalCity();
             tableModel.addRow(tblRow);
-        }
+        } while (dbResult.next());
     }
+
+    private void showHospital(Hospital toUpdHospital) {
+        hospId.setText(String.valueOf(toUpdHospital.getHospitalId()));
+        hospName.setText(toUpdHospital.getHospitalName());
+        hospCity.setText(toUpdHospital.getHospitalCity());
+    }
+
+    private void clearFields() {
+        hospId.setText("");
+        hospName.setText("");
+        hospCity.setText("");
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton createHospitalBtn;
-    private javax.swing.JPasswordField hospAdminPassword;
-    private javax.swing.JTextField hospAdminUsername;
+    private javax.swing.JButton deleteHospBtn;
     private javax.swing.JTextField hospCity;
     private javax.swing.JTextField hospId;
     private javax.swing.JTextField hospName;
@@ -308,8 +392,74 @@ public class ManageHospitalPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton updHospBtn;
+    private javax.swing.JButton viewHospBtn;
     // End of variables declaration//GEN-END:variables
+
+    private void deleteHospital(Hospital toDelHospital) {
+
+        Connection dbConn = null;
+        PreparedStatement hospStatement = null;
+
+        String hospQuery = "DELETE FROM book_info WHERE book_id =  ?;";
+
+        Hospital hosp = new Hospital();
+        hosp.setHospitalId(Long.valueOf(hospId.getText()));
+        hosp.setHospitalName(hospName.getText());
+        hosp.setHospitalCity(hospCity.getText());
+
+
+        try {
+            dbConn = db.getConnection();
+            if (dbConn != null) {
+                dbConn.setAutoCommit(false);
+                hospStatement = dbConn.prepareStatement(hospQuery);
+                hospStatement.setLong(1, hosp.getHospitalId());
+                hospStatement.setString(2, hosp.getHospitalName());
+                hospStatement.setString(3, hosp.getHospitalCity());
+
+                
+                if (hospStatement.executeUpdate() > 0) {
+                    System.out.println("Deleted Hospital Successfully!");
+                    JOptionPane.showMessageDialog(this, "Deleted Hospital Successfully!");
+                    dbConn.commit();
+                } else {
+                    System.out.println("Failed to delete hospital");
+                    JOptionPane.showMessageDialog(this, "Failed to delete hospital!");
+                    dbConn.rollback();
+                }
+            } else {
+                System.out.println("DB connection not connected");
+            }
+        } catch (SQLException sqlExp) {
+            //rollback the connection
+            sqlExp.printStackTrace();
+        } catch (Exception exp) {
+            exp.printStackTrace();
+
+        } finally {
+            if (hospStatement != null) {
+                try {
+                    if (!hospStatement.isClosed()) {
+                        hospStatement.close();
+                    }
+                } catch (SQLException err) {
+                    err.printStackTrace();
+
+                }
+            }
+            if (dbConn != null) {
+                try {
+                    if (!dbConn.isClosed()) {
+                        db.closeConnection(dbConn);
+                    }
+                } catch (SQLException err) {
+                    err.printStackTrace();
+
+                }
+            }
+        }
+        populateTable();
+    }
 }

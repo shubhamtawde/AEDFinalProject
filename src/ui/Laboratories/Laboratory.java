@@ -35,6 +35,7 @@ public class Laboratory extends javax.swing.JFrame {
         createResearcherButton = new javax.swing.JButton();
         monitorTestorButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        testerPanelButtton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,7 +65,7 @@ public class Laboratory extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(logoutButton))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         createTesterButton.setText("Create Tester");
@@ -85,27 +86,36 @@ public class Laboratory extends javax.swing.JFrame {
 
         jButton2.setText("Monitor Researcher");
 
+        testerPanelButtton.setText("Tester Panel");
+        testerPanelButtton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                testerPanelButttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(createTesterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(createResearcherButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(monitorTestorButton)
-                    .addComponent(jButton2))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(testerPanelButtton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(createTesterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(createResearcherButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(monitorTestorButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {createResearcherButton, createTesterButton, jButton2, monitorTestorButton});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {createResearcherButton, createTesterButton, jButton2, monitorTestorButton, testerPanelButtton});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addGap(27, 27, 27)
                 .addComponent(createTesterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(monitorTestorButton)
@@ -113,10 +123,12 @@ public class Laboratory extends javax.swing.JFrame {
                 .addComponent(createResearcherButton)
                 .addGap(40, 40, 40)
                 .addComponent(jButton2)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(testerPanelButtton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(140, 140, 140))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {createResearcherButton, createTesterButton, jButton2, monitorTestorButton});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {createResearcherButton, createTesterButton, jButton2, monitorTestorButton, testerPanelButtton});
 
         SplitPane.setLeftComponent(jPanel2);
 
@@ -142,10 +154,10 @@ public class Laboratory extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(SplitPane, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(SplitPane))
         );
 
         pack();
@@ -159,9 +171,15 @@ public class Laboratory extends javax.swing.JFrame {
 
     private void monitorTestorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monitorTestorButtonActionPerformed
         // TODO add your handling code here:
-         MonitorTester monitorTester = new MonitorTester();
+        MonitorTester monitorTester = new MonitorTester();
         SplitPane.setRightComponent(monitorTester);
     }//GEN-LAST:event_monitorTestorButtonActionPerformed
+
+    private void testerPanelButttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testerPanelButttonActionPerformed
+        // TODO add your handling code here:
+        TesterPanel testerPanel = new TesterPanel();
+        SplitPane.setRightComponent(testerPanel);
+    }//GEN-LAST:event_testerPanelButttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,5 +228,6 @@ public class Laboratory extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton monitorTestorButton;
+    private javax.swing.JButton testerPanelButtton;
     // End of variables declaration//GEN-END:variables
 }

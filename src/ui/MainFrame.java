@@ -115,14 +115,15 @@ public class MainFrame extends javax.swing.JFrame {
             dbConn = db.getConnection();
             if (dbConn != null) {
                 dbConn.setAutoCommit(false);
-                sqlStatement = dbConn.prepareStatement("Select username,password from Credentials" + " where username = ? and password=?;");
+                sqlStatement = dbConn.prepareStatement("Select * from Credentials" + " where username = ? and password=?;");
 
                 sqlStatement.setString(1, userName.getText());
                 sqlStatement.setString(2, String.valueOf(password.getPassword()));
                 dbResult = sqlStatement.executeQuery();
-               // System.out.println(dbResult.);
+                
                 if (!dbResult.next()) {
                     JOptionPane.showMessageDialog(this, "Invalid credentials");
+                    return;
                    
                 } else if(dbResult.getString(4).equals("System Admin")){
                     SystemAdmin m = new SystemAdmin();
@@ -130,8 +131,10 @@ public class MainFrame extends javax.swing.JFrame {
                     setVisible(false);
                 }
                 else if(dbResult.getString(4).equals("University Admin")){
-                    ResearcherAdmin m = new ResearcherAdmin(dbResult.getLong(1));
-                    m.setVisible(true);
+                    System.out.println("inside uni if");
+                     
+                    ResearchAdmin researchAdmin = new ResearchAdmin(dbResult.getLong(1));
+                    researchAdmin.setVisible(true);
                     setVisible(false);
                 }
             } else {

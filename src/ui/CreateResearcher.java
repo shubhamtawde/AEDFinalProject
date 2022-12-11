@@ -8,6 +8,7 @@ import Model.system.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +21,7 @@ public class CreateResearcher extends javax.swing.JPanel {
      * Creates new form CreateResearcher
      */
     
+
      Connection dbConn = null;
     PreparedStatement sqlStatement = null;
      PreparedStatement sqlStatement1 = null;
@@ -147,7 +149,7 @@ public class CreateResearcher extends javax.swing.JPanel {
             if (dbConn != null) {
                 dbConn.setAutoCommit(false);
                 sqlStatement = dbConn.prepareStatement("INSERT INTO ResearcherList" + " VALUES " + " (?,?,?,?,?,?); ");
-                
+                 sqlStatement1 = dbConn.prepareStatement("INSERT INTO Credentials" + " VALUES " + " (?,?,?,?,?);");
                 Long researcherId = (long) (Math.random() * (9999 - 1) + 1);
                 sqlStatement.setLong(1, researcherId);
                 sqlStatement.setLong(2, id);
@@ -157,6 +159,12 @@ public class CreateResearcher extends javax.swing.JPanel {
                 sqlStatement.setString(6, email.getText());
                
               
+                 sqlStatement1.setLong(1, id);
+                sqlStatement1.setString(2, userName.getText());
+                sqlStatement1.setString(3, String.valueOf(password.getPassword()));
+                 sqlStatement1.setString(4, "Pharma Admin");
+                  sqlStatement1.setString(5, "Pharma Admin");
+
                 if (sqlStatement.executeUpdate() > 0) {
                     System.out.println("commited");
                     dbConn.commit();

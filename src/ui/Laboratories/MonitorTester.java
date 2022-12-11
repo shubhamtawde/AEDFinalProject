@@ -194,12 +194,12 @@ public class MonitorTester extends javax.swing.JPanel {
         int selectedRowIndex = jTable1.getSelectedRow();
 
         if (jTable1.getSelectedRowCount() > 1) {
-            JOptionPane.showMessageDialog(this, "Please select only 1 row !");
+            JOptionPane.showMessageDialog(null, "Please select only 1 row !", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select 1 row ");
+            JOptionPane.showMessageDialog(null, "Please select 1 row !", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         } else {
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -264,12 +264,12 @@ public class MonitorTester extends javax.swing.JPanel {
         int selectedRowIndex = jTable1.getSelectedRow();
 
         if (jTable1.getSelectedRowCount() > 1) {
-            JOptionPane.showMessageDialog(this, "Please select only 1 row !");
+            JOptionPane.showMessageDialog(null, "Please select only 1 row !", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select 1 row ");
+            JOptionPane.showMessageDialog(null, "Please select 1 row !", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         } else {
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();

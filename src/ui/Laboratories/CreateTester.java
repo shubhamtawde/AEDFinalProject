@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 /**
  *
  * @author vidhisejpal
@@ -138,6 +139,14 @@ public class CreateTester extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please fill all the attributes", "Error", JOptionPane.ERROR_MESSAGE);
               return;
         }
+        
+        else if (!(Pattern.matches("^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", emailId.getText()))){
+            JOptionPane.showMessageDialog(null, "Please enter a valid email", "Error", JOptionPane.ERROR_MESSAGE);
+            return ;
+        }
+        
+        
+        
         
                 DatabaseConnection db = new DatabaseConnection();
 

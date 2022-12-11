@@ -38,7 +38,6 @@ public class Research extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        title = new javax.swing.JLabel();
         searchLabel = new javax.swing.JLabel();
         experimentName = new javax.swing.JTextField();
         keywords = new javax.swing.JTextField();
@@ -47,13 +46,13 @@ public class Research extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         GlobalSearchTable = new javax.swing.JTable();
         upvoteButton = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        title.setFont(new java.awt.Font("Helvetica Neue", 1, 22)); // NOI18N
-        title.setText("Global Search");
-
-        searchLabel.setFont(new java.awt.Font("Arial Unicode MS", 0, 16)); // NOI18N
+        searchLabel.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
+        searchLabel.setForeground(new java.awt.Color(25, 118, 211));
         searchLabel.setText("Search by Experiment Name  : ");
 
         keywords.addActionListener(new java.awt.event.ActionListener() {
@@ -62,10 +61,13 @@ public class Research extends javax.swing.JFrame {
             }
         });
 
-        searchLabel1.setFont(new java.awt.Font("Arial Unicode MS", 0, 16)); // NOI18N
+        searchLabel1.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
+        searchLabel1.setForeground(new java.awt.Color(25, 118, 211));
         searchLabel1.setText("Search by KeyWords  : ");
 
-        searchButton.setFont(new java.awt.Font("Arial Unicode MS", 1, 16)); // NOI18N
+        searchButton.setBackground(new java.awt.Color(25, 118, 211));
+        searchButton.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
+        searchButton.setForeground(new java.awt.Color(255, 255, 255));
         searchButton.setText("Search");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,7 +75,8 @@ public class Research extends javax.swing.JFrame {
             }
         });
 
-        GlobalSearchTable.setFont(new java.awt.Font("Arial Unicode MS", 0, 13)); // NOI18N
+        GlobalSearchTable.setBackground(new java.awt.Color(25, 118, 211));
+        GlobalSearchTable.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
         GlobalSearchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -95,6 +98,9 @@ public class Research extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(GlobalSearchTable);
 
+        upvoteButton.setBackground(new java.awt.Color(25, 118, 211));
+        upvoteButton.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
+        upvoteButton.setForeground(new java.awt.Color(255, 255, 255));
         upvoteButton.setText("Upvote");
         upvoteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,37 +108,40 @@ public class Research extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(25, 118, 211));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Global Search for Experiments ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(upvoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(searchLabel)
                             .addComponent(searchLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(keywords, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(experimentName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 758, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(upvoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(keywords, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(experimentName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 758, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(206, 206, 206))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(experimentName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -140,13 +149,13 @@ public class Research extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(keywords, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(24, 24, 24)
+                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(27, 27, 27)
                 .addComponent(upvoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {experimentName, keywords});
@@ -360,12 +369,12 @@ public class Research extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable GlobalSearchTable;
     private javax.swing.JTextField experimentName;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField keywords;
     private javax.swing.JButton searchButton;
     private javax.swing.JLabel searchLabel;
     private javax.swing.JLabel searchLabel1;
-    private javax.swing.JLabel title;
     private javax.swing.JButton upvoteButton;
     // End of variables declaration//GEN-END:variables
 

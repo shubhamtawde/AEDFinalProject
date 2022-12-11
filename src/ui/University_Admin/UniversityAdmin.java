@@ -29,7 +29,7 @@ public class UniversityAdmin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         logoutButton = new javax.swing.JButton();
-        jSplitPane1 = new javax.swing.JSplitPane();
+        SplitPane1 = new javax.swing.JSplitPane();
         jPanel2 = new javax.swing.JPanel();
         requestCollabrationButton = new javax.swing.JButton();
         monitorCollabrationButton = new javax.swing.JButton();
@@ -84,6 +84,11 @@ public class UniversityAdmin extends javax.swing.JFrame {
         monitorCollabrationButton.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         monitorCollabrationButton.setForeground(new java.awt.Color(25, 118, 211));
         monitorCollabrationButton.setText("Monitor Collabration");
+        monitorCollabrationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monitorCollabrationButtonActionPerformed(evt);
+            }
+        });
 
         createResearcherButton.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         createResearcherButton.setForeground(new java.awt.Color(25, 118, 211));
@@ -125,7 +130,7 @@ public class UniversityAdmin extends javax.swing.JFrame {
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {createResearcherButton, monitorCollabrationButton, monitorResearcherButton, requestCollabrationButton});
 
-        jSplitPane1.setLeftComponent(jPanel2);
+        SplitPane1.setLeftComponent(jPanel2);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -140,21 +145,21 @@ public class UniversityAdmin extends javax.swing.JFrame {
             .addGap(0, 666, Short.MAX_VALUE)
         );
 
-        jSplitPane1.setRightComponent(jPanel3);
+        SplitPane1.setRightComponent(jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(SplitPane1, javax.swing.GroupLayout.Alignment.LEADING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jSplitPane1))
+                .addComponent(SplitPane1))
         );
 
         pack();
@@ -164,6 +169,12 @@ public class UniversityAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
       
     }//GEN-LAST:event_requestCollabrationButtonActionPerformed
+
+    private void monitorCollabrationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monitorCollabrationButtonActionPerformed
+        // TODO add your handling code here:
+        MonitorCollabration monitorCollabration = new MonitorCollabration();
+        SplitPane1.setRightComponent(monitorCollabration);
+    }//GEN-LAST:event_monitorCollabrationButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,12 +212,12 @@ public class UniversityAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSplitPane SplitPane1;
     private javax.swing.JButton createResearcherButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton monitorCollabrationButton;
     private javax.swing.JButton monitorResearcherButton;

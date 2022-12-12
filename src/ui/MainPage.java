@@ -151,7 +151,6 @@ public class MainPage extends javax.swing.JFrame {
                     user.setRole(dbResult.getString(4));
                     if(user.getRole().equals("Hospital Admin")) {
                         HospitalAdminHome hosp = new HospitalAdminHome();
-                        hosp.id = user.getUserId();
                         hosp.setVisible(true);
                         setVisible(false);
                     }

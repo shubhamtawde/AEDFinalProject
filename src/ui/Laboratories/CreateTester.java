@@ -180,6 +180,7 @@ public class CreateTester extends javax.swing.JPanel {
             dbConn = db.getConnection();
             if (dbConn != null) {
                 dbConn.setAutoCommit(false);
+                //generating random id
                 Long id = (long) (Math.random() * (9999 - 1) + 1);
                 Tester test = new Tester();
                 test.setTesterId(id);
@@ -200,6 +201,7 @@ public class CreateTester extends javax.swing.JPanel {
                 sqlStatement = dbConn.prepareStatement("INSERT INTO Tester" + " VALUES " + " (?,?,?,?,?,?,?); ");
                 sqlStatement1 = dbConn.prepareStatement("INSERT INTO Credentials" + " VALUES " + " (?,?,?,?,?);");
                 
+                //executing query
                 sqlStatement.setLong(1, test.getTesterId());
                 sqlStatement.setLong(2, test.getOrgId());
                 sqlStatement.setString(3, test.getTesterName());

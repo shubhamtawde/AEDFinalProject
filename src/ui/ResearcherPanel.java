@@ -158,6 +158,7 @@ public class ResearcherPanel extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ViewExperiment viewExperiment = new ViewExperiment();
          viewExperiment.id = id;
+       
         jSplitPane1.setRightComponent(viewExperiment);
     }//GEN-LAST:event_jButton2ActionPerformed
 

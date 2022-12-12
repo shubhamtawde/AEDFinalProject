@@ -168,7 +168,7 @@ public class MonitorCollabration extends javax.swing.JPanel {
                 manufStatement = dbConn.prepareStatement(updQuery);
                 manufStatement.setString(1, app);
                 manufStatement.setString(2, expName);
-
+                // checking for query to be executed
                 if (manufStatement.executeUpdate() > 0) {
                     System.out.println("Approved!");
                     JOptionPane.showMessageDialog(this, "Approved!");

@@ -40,8 +40,6 @@ public class Research extends javax.swing.JFrame {
 
         searchLabel = new javax.swing.JLabel();
         experimentName = new javax.swing.JTextField();
-        keywords = new javax.swing.JTextField();
-        searchLabel1 = new javax.swing.JLabel();
         searchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         GlobalSearchTable = new javax.swing.JTable();
@@ -55,16 +53,6 @@ public class Research extends javax.swing.JFrame {
         searchLabel.setForeground(new java.awt.Color(25, 118, 211));
         searchLabel.setText("Search by Experiment Name  : ");
 
-        keywords.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                keywordsActionPerformed(evt);
-            }
-        });
-
-        searchLabel1.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
-        searchLabel1.setForeground(new java.awt.Color(25, 118, 211));
-        searchLabel1.setText("Search by KeyWords  : ");
-
         searchButton.setBackground(new java.awt.Color(25, 118, 211));
         searchButton.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         searchButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -77,19 +65,20 @@ public class Research extends javax.swing.JFrame {
 
         GlobalSearchTable.setBackground(new java.awt.Color(25, 118, 211));
         GlobalSearchTable.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        GlobalSearchTable.setForeground(new java.awt.Color(255, 255, 255));
         GlobalSearchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Experiment Name", "Keywords", "Research Description", "Lead Scientist", "Collabrators", "Upvote"
+                "ExperimentId", "Experiment Name", "Researcher Name", "Problem Statement", "Observation", "Upvote"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -125,13 +114,9 @@ public class Research extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(upvoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchLabel)
-                            .addComponent(searchLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(searchLabel)
                         .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(keywords, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(experimentName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(experimentName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 758, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(206, 206, 206))
@@ -145,42 +130,32 @@ public class Research extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(experimentName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(keywords, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(40, 40, 40)
                 .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(upvoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {experimentName, keywords});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void keywordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keywordsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_keywordsActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
         DatabaseConnection db = new DatabaseConnection();
         
-        if (!experimentName.getText().isEmpty() && !keywords.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "You cannot search by both inputs !", "Error", JOptionPane.ERROR_MESSAGE);
-
+        if (experimentName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Enter valid Experiment Name to search", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         } 
-        else if (!experimentName.getText().isEmpty()) {
+        else{
             try {
                 dbConn = db.getConnection();
                 if (dbConn != null) {
                     dbConn.setAutoCommit(false);
-                    sqlStatement = dbConn.prepareStatement("select * from GlobalSearch where ExperimentName= ?;");
+                    sqlStatement = dbConn.prepareStatement("select * from Experiments where experimentName=?;");
 
                     sqlStatement.setString(1, experimentName.getText());
 
@@ -219,50 +194,7 @@ public class Research extends javax.swing.JFrame {
             }
 
         }
-        else{
-            try {
-                dbConn = db.getConnection();
-                if (dbConn != null) {
-                    dbConn.setAutoCommit(false);
-                    sqlStatement = dbConn.prepareStatement("select * from GlobalSearch where Keywords= ?;");
-
-                    sqlStatement.setString(1, keywords.getText());
-
-                    dbResult = sqlStatement.executeQuery();
-
-                    //System.out.println(dbResult.next());
-                    populateTable(dbResult);
-                    keywords.setText("");
-
-                } else {
-                    System.out.println("connection not done");
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            } finally {
-                if (sqlStatement != null) {
-                    try {
-                        if (!sqlStatement.isClosed()) {
-                            sqlStatement.close();
-                        }
-                    } catch (SQLException err) {
-                        err.printStackTrace();
-
-                    }
-                }
-                if (dbConn != null) {
-                    try {
-                        if (!dbConn.isClosed()) {
-                            db.closeConnection(dbConn);
-                        }
-                    } catch (SQLException err) {
-                        err.printStackTrace();
-
-                    }
-                }
-            }
-            
-        }
+       
 
     }//GEN-LAST:event_searchButtonActionPerformed
 
@@ -289,7 +221,7 @@ public class Research extends javax.swing.JFrame {
             try {
                 dbConn = db.getConnection();
                 if (dbConn != null) {
-                    sqlStatement = dbConn.prepareStatement("update GlobalSearch set Verify = verify+1 where GlobalSearchID = ?;");
+                    sqlStatement = dbConn.prepareStatement("update Experiments set upvote = upvote+1 where experimentid = ?;");
 
                     
                     sqlStatement.setLong(1, id_long);
@@ -371,10 +303,8 @@ public class Research extends javax.swing.JFrame {
     private javax.swing.JTextField experimentName;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField keywords;
     private javax.swing.JButton searchButton;
     private javax.swing.JLabel searchLabel;
-    private javax.swing.JLabel searchLabel1;
     private javax.swing.JButton upvoteButton;
     // End of variables declaration//GEN-END:variables
 
@@ -383,14 +313,14 @@ public class Research extends javax.swing.JFrame {
         model.setRowCount(0);
         try {
             while (dbResult.next()) {
-                Object[] row = new Object[7];
+                Object[] row = new Object[6];
                 row[0] = dbResult.getInt(1);
-                row[1] = dbResult.getString(2);
+                row[1] = dbResult.getString(3);
                 row[2] = dbResult.getString(3);
-                row[3] = dbResult.getString(4);
-                row[4] = dbResult.getString(5);
-                row[5] = dbResult.getString(6);
-                row[6] = dbResult.getString(7);
+                row[3] = dbResult.getString(5);
+                row[4] = dbResult.getString(7);
+                row[5] = dbResult.getInt(9);
+                
                 model.addRow(row);
             }
         } catch (Exception e) {

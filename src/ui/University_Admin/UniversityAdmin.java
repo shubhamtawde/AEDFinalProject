@@ -10,11 +10,14 @@ package ui.University_Admin;
  */
 public class UniversityAdmin extends javax.swing.JFrame {
 
+    Long uniId;
+    
     /**
      * Creates new form UniversityAdmin
      */
     public UniversityAdmin() {
         initComponents();
+        uniId = 0L;
     }
 
     /**
@@ -167,12 +170,15 @@ public class UniversityAdmin extends javax.swing.JFrame {
 
     private void requestCollabrationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestCollabrationButtonActionPerformed
         // TODO add your handling code here:
-      
+      RequestCollabPanel req = new  RequestCollabPanel();
+      req.uniId = uniId;
+      SplitPane1.setRightComponent(req);
     }//GEN-LAST:event_requestCollabrationButtonActionPerformed
 
     private void monitorCollabrationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monitorCollabrationButtonActionPerformed
         // TODO add your handling code here:
         MonitorCollabration monitorCollabration = new MonitorCollabration();
+        monitorCollabration.uniID = uniId;
         SplitPane1.setRightComponent(monitorCollabration);
     }//GEN-LAST:event_monitorCollabrationButtonActionPerformed
 

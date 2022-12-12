@@ -321,6 +321,7 @@ public class Research extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) GlobalSearchTable.getModel();
         model.setRowCount(0);
         try {
+            //populating table
             while (dbResult.next()) {
                 Object[] row = new Object[6];
                 row[0] = dbResult.getInt(1);

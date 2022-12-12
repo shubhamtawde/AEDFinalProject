@@ -9,9 +9,12 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -26,6 +29,7 @@ public class CreateExperiment extends javax.swing.JPanel {
     public Long id;
     PreparedStatement sqlStatement = null;
      PreparedStatement sqlStatement1 = null;
+     Logger logger = LogManager.getLogger(CreateExperiment.class);
     public String photoLocation; 
     public CreateExperiment() {
         initComponents();
@@ -257,6 +261,7 @@ public class CreateExperiment extends javax.swing.JPanel {
             }
         } catch (Exception e) {
             System.out.println(e);
+            logger.error(e);
         } finally {
             if (sqlStatement != null ) {
                 try {
@@ -266,6 +271,7 @@ public class CreateExperiment extends javax.swing.JPanel {
                     
                 } catch (SQLException err) {
                     err.printStackTrace();
+                    logger.error(err);
                     
                 }
             }
@@ -276,6 +282,7 @@ public class CreateExperiment extends javax.swing.JPanel {
                     }
                 } catch (SQLException err) {
                     err.printStackTrace();
+                     logger.error(err);
                    
                 }
             }

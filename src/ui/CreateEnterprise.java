@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -22,6 +24,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
     Connection dbConn = null;
     PreparedStatement sqlStatement = null;
      PreparedStatement sqlStatement1 = null;
+      Logger logger = LogManager.getLogger(CreateEnterprise.class);
     public CreateEnterprise() {
         initComponents();
     }
@@ -226,7 +229,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
                 System.out.println("connection not done");
             }
         } catch (Exception e) {
-            System.out.println(e);
+           logger.error(e);
         } finally {
             if (sqlStatement != null && sqlStatement1 != null ) {
                 try {
@@ -238,6 +241,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
                     }
                 } catch (SQLException err) {
                     err.printStackTrace();
+                     logger.error(err);
                     
                 }
             }
@@ -248,6 +252,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
                     }
                 } catch (SQLException err) {
                     err.printStackTrace();
+                     logger.error(err);
                    
                 }
             }

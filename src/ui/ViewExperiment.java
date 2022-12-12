@@ -73,6 +73,11 @@ public class ViewExperiment extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("View");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Update");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -122,8 +127,7 @@ public class ViewExperiment extends javax.swing.JPanel {
                                 .addGap(33, 33, 33)
                                 .addComponent(jButton2)
                                 .addGap(182, 182, 182)
-                                .addComponent(jButton4)))
-                        .addGap(129, 129, 129)))
+                                .addComponent(jButton4)))))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -290,13 +294,83 @@ public class ViewExperiment extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedRowIndex = jTable1.getSelectedRow();
+
+        if (jTable1.getSelectedRowCount() > 1) {
+            JOptionPane.showMessageDialog(this, "Please select only 1 row !");
+            return;
+        }
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select 1 row ");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            //Long id= Long.valueOf(TOOL_TIP_TEXT_KEY) model.getValueAt(selectedRowIndex,0);
+            String id = String.valueOf(model.getValueAt(selectedRowIndex, 0));
+            Long id_long = Long.valueOf(id);
+            System.out.println(id);
+            DatabaseConnection db = new DatabaseConnection();
+            ResultSet dbResult = null;
+            try {
+                dbConn = db.getConnection();
+                if (dbConn != null) {
+                    sqlStatement = dbConn.prepareStatement("select * from Experiments where experimentid=?;");
+                    sqlStatement.setLong(1, id_long);
+
+                    dbResult = sqlStatement.executeQuery();
+
+                    //System.out.println(dbResult.next());
+                    //populateTable(dbResult);
+                    while (dbResult.next()) {
+
+                        observation.setText(dbResult.getString(7));
+                        uploadImage.setText(dbResult.getString(8));
+                       
+
+                    }
+
+                } else {
+                    System.out.println("connection not done");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            } finally {
+                if (sqlStatement != null) {
+                    try {
+                        if (!sqlStatement.isClosed()) {
+                            sqlStatement.close();
+                        }
+
+                    } catch (SQLException err) {
+                        err.printStackTrace();
+
+                    }
+                }
+                if (dbConn != null) {
+                    try {
+                        if (!dbConn.isClosed()) {
+                            db.closeConnection(dbConn);
+                        }
+                    } catch (SQLException err) {
+                        err.printStackTrace();
+
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void findTableData() {
         DatabaseConnection db = new DatabaseConnection();
         ResultSet dbResult = null;
         try {
             dbConn = db.getConnection();
             if (dbConn != null) {
-                sqlStatement = dbConn.prepareStatement("select * from Experiments where researchId = ?;");
+                sqlStatement = dbConn.prepareStatement("select * from Experiments where researcherId = ?;");
                 sqlStatement.setLong(1, id);
                 dbResult = sqlStatement.executeQuery();
 

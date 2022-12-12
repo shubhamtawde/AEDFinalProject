@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -26,6 +28,7 @@ public class CreateResearcher extends javax.swing.JPanel {
     PreparedStatement sqlStatement ,sqlStatement1, sqlStatement2 = null;
      
      Long id = null;
+       Logger logger = LogManager.getLogger(CreateResearcher.class);
     public CreateResearcher(Long id) {
         initComponents();
         this.id = id;
@@ -198,6 +201,7 @@ public class CreateResearcher extends javax.swing.JPanel {
                    
                 } catch (SQLException err) {
                     err.printStackTrace();
+                    logger.error(err);
                     
                 }
             }
@@ -208,6 +212,7 @@ public class CreateResearcher extends javax.swing.JPanel {
                     }
                 } catch (SQLException err) {
                     err.printStackTrace();
+                     logger.error(err);
                    
                 }
             }

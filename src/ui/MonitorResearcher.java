@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -24,6 +26,7 @@ public class MonitorResearcher extends javax.swing.JPanel {
    
        Connection dbConn = null;
     PreparedStatement sqlStatement,sqlStatement1 = null;
+     Logger logger = LogManager.getLogger(MonitorResearcher.class);
     public MonitorResearcher() {
         initComponents();
          findTableData();
@@ -215,6 +218,7 @@ public class MonitorResearcher extends javax.swing.JPanel {
                 }
             } catch (Exception e) {
                 System.out.println(e);
+                logger.error(e);
             } finally {
                 if (sqlStatement != null) {
                     try {
@@ -224,6 +228,7 @@ public class MonitorResearcher extends javax.swing.JPanel {
 
                     } catch (SQLException err) {
                         err.printStackTrace();
+                        logger.error(err);
 
                     }
                 }
@@ -234,6 +239,7 @@ public class MonitorResearcher extends javax.swing.JPanel {
                         }
                     } catch (SQLException err) {
                         err.printStackTrace();
+                        logger.error(err);
 
                     }
                 }
@@ -286,6 +292,7 @@ public class MonitorResearcher extends javax.swing.JPanel {
                 }
             } catch (Exception e) {
                 System.out.println(e);
+                logger.error(e);
             } finally {
                 if (sqlStatement != null) {
                     try {
@@ -295,6 +302,7 @@ public class MonitorResearcher extends javax.swing.JPanel {
 
                     } catch (SQLException err) {
                         err.printStackTrace();
+                        logger.error(err);
 
                     }
                 }
@@ -305,6 +313,7 @@ public class MonitorResearcher extends javax.swing.JPanel {
                         }
                     } catch (SQLException err) {
                         err.printStackTrace();
+                        logger.error(err);
 
                     }
                 }
@@ -353,6 +362,7 @@ public class MonitorResearcher extends javax.swing.JPanel {
                 }
             } catch (Exception e) {
                 System.out.println(e);
+                logger.error(e);
             } finally {
                 if (sqlStatement != null && sqlStatement1 != null) {
                     try {
@@ -364,6 +374,7 @@ public class MonitorResearcher extends javax.swing.JPanel {
                         }
                     } catch (SQLException err) {
                         err.printStackTrace();
+                        logger.error(err);
 
                     }
                 }
@@ -374,6 +385,7 @@ public class MonitorResearcher extends javax.swing.JPanel {
                         }
                     } catch (SQLException err) {
                         err.printStackTrace();
+                        logger.error(err);
 
                     }
                 }
@@ -402,6 +414,7 @@ public class MonitorResearcher extends javax.swing.JPanel {
             }
         } catch (Exception e) {
             System.out.println(e);
+            logger.error(e);
         } finally {
             if (sqlStatement != null) {
                 try {
@@ -411,6 +424,7 @@ public class MonitorResearcher extends javax.swing.JPanel {
 
                 } catch (SQLException err) {
                     err.printStackTrace();
+                    logger.error(err);
 
                 }
             }
@@ -421,6 +435,7 @@ public class MonitorResearcher extends javax.swing.JPanel {
                     }
                 } catch (SQLException err) {
                     err.printStackTrace();
+                    logger.error(err);
 
                 }
             }

@@ -187,6 +187,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
+        if(username.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Username cannot be blank!");
+            return;
+        }
+        if(String.valueOf(password.getPassword()).equals("")) {
+            JOptionPane.showMessageDialog(this, "Password cannot be blank!");
+            return;
+        }
         DatabaseConnection db = new DatabaseConnection();
         ResultSet dbResult = null;
         try {

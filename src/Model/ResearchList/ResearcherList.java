@@ -2,20 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model.enterprise;
+package Model.ResearchList;
 
 /**
  *
  * @author siddharthvaghela
  */
-public class EnterpriseList {
+public class ResearcherList {
     Long id;
+    Long organizationId;
     String name;
     String username;
-    String category;
     String password;
-    String emailId;
-    String license;
+    String emailId; 
 
     public Long getId() {
         return id;
@@ -23,6 +22,14 @@ public class EnterpriseList {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getOrganizationId() {
+        return organizationId;
+    }
+
+    public void setOrganizationId(Long organizationId) {
+        this.organizationId = organizationId;
     }
 
     public String getName() {
@@ -41,14 +48,6 @@ public class EnterpriseList {
         this.username = username;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -64,12 +63,6 @@ public class EnterpriseList {
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
-
-    public String getLicense() {
-        return license;
-    }
-
-    public void setLicense(String license) {
-        this.license = license;
-    }
+    
+    
 }

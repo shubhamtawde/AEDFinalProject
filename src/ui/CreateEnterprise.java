@@ -52,13 +52,24 @@ public class CreateEnterprise extends javax.swing.JPanel {
         licenseDate = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         enterpriseEmail = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(25, 118, 211));
         jLabel1.setText("Name:");
 
+        jLabel2.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(25, 118, 211));
         jLabel2.setText("Category:");
 
+        jLabel3.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(25, 118, 211));
         jLabel3.setText("Username:");
 
+        jLabel4.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(25, 118, 211));
         jLabel4.setText("Password:");
 
         usernameEnterprise.addActionListener(new java.awt.event.ActionListener() {
@@ -73,6 +84,9 @@ public class CreateEnterprise extends javax.swing.JPanel {
             }
         });
 
+        saveEnterpriseButton.setBackground(new java.awt.Color(25, 118, 211));
+        saveEnterpriseButton.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
+        saveEnterpriseButton.setForeground(new java.awt.Color(255, 255, 255));
         saveEnterpriseButton.setText("Save");
         saveEnterpriseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,76 +94,93 @@ public class CreateEnterprise extends javax.swing.JPanel {
             }
         });
 
+        enterpriseCategory.setBackground(new java.awt.Color(25, 118, 211));
+        enterpriseCategory.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        enterpriseCategory.setForeground(new java.awt.Color(255, 255, 255));
         enterpriseCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Independent Researcher", "University", "Health Care", "Pharmaceutical Companies", "Research Publisher" }));
 
+        jLabel5.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(25, 118, 211));
         jLabel5.setText("License:");
 
+        jLabel6.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(25, 118, 211));
         jLabel6.setText("Email Id:");
+
+        jLabel7.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(25, 118, 211));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Create Enterprise");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(153, 153, 153)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(246, 246, 246)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(usernameEnterprise)
+                            .addComponent(enterpriseCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(enterpriseEmail)
+                            .addComponent(enterpriseName)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(passwordEnterprise)
-                            .addComponent(licenseDate)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1))
+                            .addComponent(licenseDate)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(jLabel6)))
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(saveEnterpriseButton)
-                            .addComponent(enterpriseName)
-                            .addComponent(usernameEnterprise)
-                            .addComponent(enterpriseCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(enterpriseEmail))))
-                .addContainerGap(347, Short.MAX_VALUE))
+                                .addComponent(saveEnterpriseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(267, 267, 267))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(enterpriseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(enterpriseName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(enterpriseCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(usernameEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(enterpriseEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(passwordEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(licenseDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(saveEnterpriseButton)
-                .addGap(99, 99, 99))
+                .addGap(29, 29, 29)
+                .addComponent(saveEnterpriseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {enterpriseCategory, enterpriseEmail, enterpriseName, licenseDate, passwordEnterprise, usernameEnterprise});
+
     }// </editor-fold>//GEN-END:initComponents
 
     private void usernameEnterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameEnterpriseActionPerformed
@@ -281,6 +312,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField licenseDate;
     private javax.swing.JTextField passwordEnterprise;
     private javax.swing.JButton saveEnterpriseButton;

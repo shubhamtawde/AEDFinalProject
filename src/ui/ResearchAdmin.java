@@ -5,6 +5,9 @@
 
 package ui;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  *
  * @author siddharthvaghela
@@ -13,6 +16,7 @@ public class ResearchAdmin extends javax.swing.JFrame {
 
     /** Creates new form ResearchForm */
     Long id = null;
+      Logger logger = LogManager.getLogger(ResearchAdmin.class);
     public ResearchAdmin(Long id) {
         initComponents();
         this.id = id;

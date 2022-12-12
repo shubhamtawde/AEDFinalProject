@@ -4,6 +4,7 @@
  */
 package ui;
 
+import Model.enterprise.EnterpriseList;
 import Model.system.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -197,6 +198,15 @@ public class CreateEnterprise extends javax.swing.JPanel {
                 sqlStatement = dbConn.prepareStatement("INSERT INTO EnterpriseList" + " VALUES " + " (?,?,?,?,?,?,?); ");
                 sqlStatement1 = dbConn.prepareStatement("INSERT INTO Credentials" + " VALUES " + " (?,?,?,?,?);");
                 Long id = (long) (Math.random() * (9999 - 1) + 1);
+                EnterpriseList enterpriseList = new EnterpriseList();
+                
+                enterpriseList.setId(id);
+                enterpriseList.setName(enterpriseName.getText());
+                enterpriseList.setUsername(usernameEnterprise.getText());
+                enterpriseList.setPassword(passwordEnterprise.getText());
+                enterpriseList.setEmailId(enterpriseEmail.getText());
+                enterpriseList.setLicense(licenseDate.getText());
+
                 sqlStatement.setLong(1, id);
                 sqlStatement.setString(2, enterpriseName.getText());
                 sqlStatement.setString(3, usernameEnterprise.getText());

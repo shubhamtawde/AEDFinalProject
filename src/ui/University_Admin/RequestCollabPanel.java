@@ -23,7 +23,7 @@ public class RequestCollabPanel extends javax.swing.JPanel {
 
     DatabaseConnection db = new DatabaseConnection();
     Long uniId;
-
+    //database connection
     /**
      * Creates new form RequestCollabPanel
      */

@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/vidhisejpal/Desktop/SEM-1/AEDFinalProject/src/ui/Laboratories/Laboratory.java</file>
-            <file>file:/Users/vidhisejpal/Desktop/SEM-1/AEDFinalProject/src/ui/Laboratories/MonitorTester.java</file>
+
+            <file>file:/Users/shubham/Documents/AED/AED/AEDFinalProject/src/ui/HospitalAdmin/ManageDoctorsPanel.java</file>
+            <file>file:/Users/shubham/Documents/AED/AED/AEDFinalProject/src/ui/UniversityAdmin/UniversityAdminHomePanel.java</file>
+            <file>file:/Users/shubham/Documents/AED/AED/AEDFinalProject/src/ui/UniversityAdmin/RequestCollabPanel.java</file>
         </group>
     </open-files>
 </project-private>

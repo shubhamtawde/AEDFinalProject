@@ -9,17 +9,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import model.System.DatabaseConnection;
+import Model.System.DatabaseConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ui.Admin.AdminHomePanel;
+import ui.Doctor.DoctorHomePanel;
+import ui.HospitalAdmin.HospitalAdminHome;
+import ui.PharmaAdmin.PharmaAdminHomePanel;
+import ui.ResearchAdmin;
+import ui.Research_Publisher.Research;
+import ui.ResearcherPanel;
+import ui.SystemAdmin;
 
 /**
  *
  * @author shubham
  */
-public class Login extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame {
 
-    Logger logger = LogManager.getLogger(Login.class);
+    Logger logger = LogManager.getLogger(MainFrame.class);
     Connection dbConn = null;
     ResultSet dbResult = null;
     PreparedStatement sqlStatement = null;
@@ -27,7 +35,7 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    public Login() {
+    public MainFrame() {
         initComponents();
     }
 
@@ -195,7 +203,63 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Invalid credentials");
                     return;
 
-                } 
+                } else if (dbResult.getString(4).equals("System Admin")) {
+                    SystemAdmin m = new SystemAdmin();
+                    m.setVisible(true);
+                    setVisible(false);
+                } else if (dbResult.getString(4).equals("University Admin")) {
+                    System.out.println("inside uni if");
+                    logger.info("inside uni if");
+                    logger.error("this is error messsage ");
+
+                    ResearchAdmin researchAdmin = new ResearchAdmin(dbResult.getLong(1));
+                    researchAdmin.setVisible(true);
+                    setVisible(false);
+
+                } else if (dbResult.getString(4).equals("Researcher")) {
+                    logger.info("inside uni if");
+                    ResearcherPanel researchPanel = new ResearcherPanel();
+                    researchPanel.id = dbResult.getLong(1);
+                    researchPanel.setVisible(true);
+                    setVisible(false);
+
+                } else if (dbResult.getString(4).equals("Hospital Admin")) {
+                    HospitalAdminHome hosp = new HospitalAdminHome();
+                    hosp.setVisible(true);
+                    setVisible(false);
+                } else if (dbResult.getString(4).equals("Doctor")) {
+                    DoctorHomePanel doc = new DoctorHomePanel();
+                    doc.setVisible(true);
+                    setVisible(false);
+                } else if (dbResult.getString(4).equals("Admin")) {
+                    AdminHomePanel admin = new AdminHomePanel();
+                    admin.setVisible(true);
+                    setVisible(false);
+                } else if (dbResult.getString(4).equals("Independent Researcher")) {
+                    logger.info("inside uni if");
+                    ResearcherPanel researchPanel = new ResearcherPanel();
+                    researchPanel.id = dbResult.getLong(1);
+                    researchPanel.setVisible(true);
+                    setVisible(false);
+                } else if (dbResult.getString(4).equals("Health Care Admin")) {
+                    logger.info("inside uni if");
+                    AdminHomePanel researchPanel = new AdminHomePanel();
+                    researchPanel.setVisible(true);
+                    setVisible(false);
+                }
+                else if (dbResult.getString(4).equals("Pharma Admin")) {
+                    logger.info("inside uni if");
+                    PharmaAdminHomePanel researchPanel = new PharmaAdminHomePanel();
+                    researchPanel.setVisible(true);
+                    setVisible(false);
+                }
+                else if (dbResult.getString(4).equals("Research Publisher")) {
+                    logger.info("inside uni if");
+                    Research res = new Research();
+                    res.setVisible(true);
+                    setVisible(false);
+                }
+
             } else {
                 logger.error("DB Connection not done");
             }
@@ -244,20 +308,21 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new MainFrame().setVisible(true);
             }
         });
     }

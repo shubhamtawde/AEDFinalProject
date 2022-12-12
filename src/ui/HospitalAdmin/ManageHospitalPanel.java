@@ -11,10 +11,10 @@ import java.sql.SQLException;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Credentials.Credentials;
+import Model.Credentials.Credentials;
 import model.Doctor.Doctor;
 import model.Hospital.Hospital;
-import model.System.DatabaseConnection;
+import Model.System.DatabaseConnection;
 
 /**
  *

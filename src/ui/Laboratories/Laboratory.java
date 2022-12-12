@@ -4,8 +4,11 @@
  */
 package ui.Laboratories;
 
+import loginform.MainFrame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ui.CreateResearcher;
+import ui.MonitorResearcher;
 
 /**
  *
@@ -97,6 +100,11 @@ public class Laboratory extends javax.swing.JFrame {
         createResearcherButton.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         createResearcherButton.setForeground(new java.awt.Color(25, 118, 211));
         createResearcherButton.setText("Create Researcher");
+        createResearcherButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createResearcherButtonActionPerformed(evt);
+            }
+        });
 
         monitorTestorButton.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         monitorTestorButton.setForeground(new java.awt.Color(25, 118, 211));
@@ -110,6 +118,11 @@ public class Laboratory extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         jButton2.setForeground(new java.awt.Color(25, 118, 211));
         jButton2.setText("Monitor Researcher");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         testerPanelButtton.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         testerPanelButtton.setForeground(new java.awt.Color(25, 118, 211));
@@ -212,7 +225,22 @@ public class Laboratory extends javax.swing.JFrame {
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
+        MainFrame m = new MainFrame();
+        m.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void createResearcherButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createResearcherButtonActionPerformed
+        // TODO add your handling code here:
+        CreateResearcher cr = new CreateResearcher(879L);
+        SplitPane.setRightComponent(cr); 
+    }//GEN-LAST:event_createResearcherButtonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        MonitorResearcher cr = new MonitorResearcher();
+        SplitPane.setRightComponent(cr); 
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

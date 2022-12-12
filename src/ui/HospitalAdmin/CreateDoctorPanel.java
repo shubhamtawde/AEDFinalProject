@@ -12,10 +12,10 @@ import java.sql.SQLException;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Credentials.Credentials;
+import Model.Credentials.Credentials;
 import model.Doctor.Doctor;
 import model.Hospital.Hospital;
-import model.System.DatabaseConnection;
+import Model.System.DatabaseConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -241,7 +241,7 @@ public class CreateDoctorPanel extends javax.swing.JPanel {
 
         Long userId = (long) (Math.random() * (9999 - 1) + 1);
         String docQuery = "INSERT INTO project.doctors VALUES  (?, ?, ?);";
-        String userQuery = "INSERT INTO project.credentials VALUES (?, ?, ?, ?);";
+        String userQuery = "INSERT INTO project.credentials VALUES (?, ?, ?, ?, ?);";
         
         Doctor doc = new Doctor();
         doc.setDoctorId(userId);
@@ -253,6 +253,7 @@ public class CreateDoctorPanel extends javax.swing.JPanel {
         creds.setUsername(docUserName.getText());
         creds.setPassword(String.valueOf(docPwd.getPassword()));
         creds.setRole("Doctor");
+        creds.setLicense("licnse");
 
         try {
             dbConn = db.getConnection();
@@ -268,6 +269,7 @@ public class CreateDoctorPanel extends javax.swing.JPanel {
                 userStatement.setString(2, creds.getUsername());
                 userStatement.setString(3, creds.getPassword());
                 userStatement.setString(4, creds.getRole());
+                userStatement.setString(5, creds.getLicense());
                 if ((docStatement.executeUpdate() > 0) && userStatement.executeUpdate() > 0) {
                     logger.info("Created Doctor Successfully!");
                     JOptionPane.showMessageDialog(this, "Created Doctor Successfully!");

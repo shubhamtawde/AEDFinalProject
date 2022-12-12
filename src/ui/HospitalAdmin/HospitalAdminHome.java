@@ -4,6 +4,7 @@
  */
 package ui.HospitalAdmin;
 
+import loginform.MainFrame;
 import ui.*;
 
 /**
@@ -48,6 +49,11 @@ public class HospitalAdminHome extends javax.swing.JFrame {
         logoutButton.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
         logoutButton.setForeground(new java.awt.Color(25, 118, 211));
         logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -162,6 +168,13 @@ public class HospitalAdminHome extends javax.swing.JFrame {
         ManageDoctorsPanel doc = new ManageDoctorsPanel();
         SplitPane1.setRightComponent(doc);
     }//GEN-LAST:event_manageDocBtnActionPerformed
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        // TODO add your handling code here:
+        MainFrame m = new MainFrame();
+        m.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_logoutButtonActionPerformed
 
     /**
      * @param args the command line arguments

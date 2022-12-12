@@ -192,7 +192,7 @@ public class CreateTester extends javax.swing.JPanel {
                 test.setTesterLicense("License date");
                 
                 Credentials cred = new Credentials();
-                cred.setId(id);
+                cred.setUserId(id);
                 cred.setUsername(userName.getText());
                 cred.setPassword(String.valueOf(password.getPassword()));
                 cred.setRole("Tester");
@@ -210,7 +210,7 @@ public class CreateTester extends javax.swing.JPanel {
                 sqlStatement.setString(6, test.getTesterPassword());
                 sqlStatement.setString(7, test.getTesterLicense()); // license date dummy value
 
-                sqlStatement1.setLong(1, cred.getId());
+                sqlStatement1.setLong(1, cred.getUserId());
                 sqlStatement1.setString(2, cred.getUsername());
                 sqlStatement1.setString(3, cred.getPassword());
 

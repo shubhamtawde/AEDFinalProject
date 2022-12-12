@@ -4,7 +4,7 @@
  */
 package ui;
 
-import Model.system.DatabaseConnection;
+import Model.System.DatabaseConnection;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -277,6 +277,7 @@ public class CreateExperiment extends javax.swing.JPanel {
                 
                 if (sqlStatement.executeUpdate() > 0 ) {
                     System.out.println("commited");
+                    JOptionPane.showMessageDialog(this, "Created Successfully");
                     dbConn.commit();
                 } else {
                     System.out.println("not commited");

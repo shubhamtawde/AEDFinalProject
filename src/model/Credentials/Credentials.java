@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model.Credentials;
+package Model.Credentials;
 
 /**
  *
@@ -17,6 +17,8 @@ public class Credentials {
     private String password;
     
     private String role;
+    
+    private String license;
 
     public Long getUserId() {
         return userId;
@@ -48,6 +50,14 @@ public class Credentials {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
     }
     
     

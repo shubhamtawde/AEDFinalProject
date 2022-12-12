@@ -4,6 +4,7 @@
  */
 package ui.PharmaAdmin;
 
+import loginform.MainFrame;
 import ui.HospitalAdmin.*;
 import ui.*;
 import ui.ManufacturerAdmin.ManageManufacturerPanel;
@@ -38,6 +39,7 @@ public class PharmaAdminHomePanel extends javax.swing.JFrame {
         createResBtn = new javax.swing.JButton();
         createManuBtn = new javax.swing.JButton();
         manageManufBtn = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,6 +53,11 @@ public class PharmaAdminHomePanel extends javax.swing.JFrame {
         logoutButton.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
         logoutButton.setForeground(new java.awt.Color(25, 118, 211));
         logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -102,6 +109,15 @@ public class PharmaAdminHomePanel extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(25, 118, 211));
+        jButton2.setText("Monitor Researcher");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -115,7 +131,9 @@ public class PharmaAdminHomePanel extends javax.swing.JFrame {
                             .addComponent(createManuBtn)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(manageManufBtn)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(manageManufBtn))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -130,7 +148,9 @@ public class PharmaAdminHomePanel extends javax.swing.JFrame {
                 .addComponent(createManuBtn)
                 .addGap(33, 33, 33)
                 .addComponent(manageManufBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(442, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(369, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {createManuBtn, createResBtn});
@@ -172,14 +192,14 @@ public class PharmaAdminHomePanel extends javax.swing.JFrame {
 
     private void createResBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createResBtnActionPerformed
         // TODO add your handling code here:
-      CreateDoctorPanel doc = new CreateDoctorPanel();
-      SplitPane1.setRightComponent(doc);
+      CreateResearcher res = new CreateResearcher(576L);
+      SplitPane1.setRightComponent(res);
     }//GEN-LAST:event_createResBtnActionPerformed
 
     private void createManuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createManuBtnActionPerformed
         // TODO add your handling code here:
-        ManageDoctorsPanel doc = new ManageDoctorsPanel();
-        SplitPane1.setRightComponent(doc);
+        CreateManufacturerPanel man = new CreateManufacturerPanel();
+        SplitPane1.setRightComponent(man);
     }//GEN-LAST:event_createManuBtnActionPerformed
 
     private void manageManufBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageManufBtnActionPerformed
@@ -187,6 +207,19 @@ public class PharmaAdminHomePanel extends javax.swing.JFrame {
         ManageManufacturerPanel manu = new ManageManufacturerPanel();
         SplitPane1.setRightComponent(manu);
     }//GEN-LAST:event_manageManufBtnActionPerformed
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        // TODO add your handling code here:
+        MainFrame m = new MainFrame();
+        m.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        MonitorResearcher cr = new MonitorResearcher();
+        SplitPane1.setRightComponent(cr);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,6 +261,7 @@ public class PharmaAdminHomePanel extends javax.swing.JFrame {
     private javax.swing.JSplitPane SplitPane1;
     private javax.swing.JButton createManuBtn;
     private javax.swing.JButton createResBtn;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

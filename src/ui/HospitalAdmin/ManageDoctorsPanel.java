@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Doctor.Doctor;
 import model.Hospital.Hospital;
-import model.System.DatabaseConnection;
+import Model.System.DatabaseConnection;
 
 /**
  *

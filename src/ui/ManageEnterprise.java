@@ -4,7 +4,7 @@
  */
 package ui;
 
-import Model.system.DatabaseConnection;
+import Model.System.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

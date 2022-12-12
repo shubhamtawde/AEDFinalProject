@@ -5,7 +5,7 @@
 package ui;
 
 import Model.enterprise.EnterpriseList;
-import Model.system.DatabaseConnection;
+import Model.System.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -264,6 +264,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
                     SendMail s = new SendMail();
                     s.sendMail(enterpriseEmail.getText());
                     System.out.println("commited");
+                    JOptionPane.showMessageDialog(this, "Created Enterprise Successfully");
                     dbConn.commit();
                 } else {
                     System.out.println("not commited");

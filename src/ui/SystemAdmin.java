@@ -6,6 +6,8 @@ package ui;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import loginform.MainFrame;
+import ui.Research_Publisher.Research;
 
 /**
  *
@@ -180,6 +182,9 @@ public class SystemAdmin extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        Research res = new Research();
+        res.setVisible(true);
+                    setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

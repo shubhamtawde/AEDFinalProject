@@ -13,11 +13,11 @@ import java.sql.SQLException;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Credentials.Credentials;
+import Model.Credentials.Credentials;
 import model.Doctor.Doctor;
 import model.Hospital.Hospital;
 import model.Manufacturer.Manufacturer;
-import model.System.DatabaseConnection;
+import Model.System.DatabaseConnection;
 
 /**
  *
@@ -218,7 +218,7 @@ public class CreateManufacturerPanel extends javax.swing.JPanel {
 
         Long userId = (long) (Math.random() * (9999 - 1) + 1);
         String manuQuery = "INSERT INTO project.manufacturer VALUES  (?, ?);";
-        String userQuery = "INSERT INTO project.credentials VALUES (?, ?, ?, ?);";
+        String userQuery = "INSERT INTO project.credentials VALUES (?, ?, ?, ?, ?);";
         
         Manufacturer manu = new Manufacturer();
         manu.setManufacturerId(manufID);
@@ -243,8 +243,10 @@ public class CreateManufacturerPanel extends javax.swing.JPanel {
                 userStatement.setString(2, creds.getUsername());
                 userStatement.setString(3, creds.getPassword());
                 userStatement.setString(4, creds.getRole());
+                userStatement.setString(5, creds.getLicense());
                 if ((manuStatement.executeUpdate() > 0) && userStatement.executeUpdate() > 0) {
                     System.out.println("Created Manufacturer Successfully!");
+                    JOptionPane.showMessageDialog(this, "Created Successfully");
                     dbConn.commit();
                 } else {
                     System.out.println("Failed to create Manufacturer");

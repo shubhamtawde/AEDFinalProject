@@ -11,9 +11,9 @@ import java.sql.SQLException;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Credentials.Credentials;
+import Model.Credentials.Credentials;
 import model.Hospital.Hospital;
-import model.System.DatabaseConnection;
+import Model.System.DatabaseConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -59,14 +59,24 @@ public class CreateHospitalPanel extends javax.swing.JPanel {
         hospCity = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(153, 153, 255));
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setFont(new java.awt.Font("Monaco", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(25, 118, 211));
         jLabel2.setText("Hospital ID");
 
         hospID.setEditable(false);
+        hospID.setBackground(null);
+        hospID.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        hospID.setForeground(new java.awt.Color(25, 118, 211));
 
+        hospName.setBackground(null);
+        hospName.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        hospName.setForeground(new java.awt.Color(25, 118, 211));
+
+        createHospBtn.setBackground(new java.awt.Color(25, 118, 211));
+        createHospBtn.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
+        createHospBtn.setForeground(new java.awt.Color(255, 255, 255));
         createHospBtn.setText("Create Hospital");
         createHospBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         createHospBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -75,38 +85,50 @@ public class CreateHospitalPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Monaco", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        hospAdminUserName.setBackground(null);
+        hospAdminUserName.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        hospAdminUserName.setForeground(new java.awt.Color(25, 118, 211));
+
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(25, 118, 211));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Create Hospital Panel");
 
-        jLabel4.setFont(new java.awt.Font("Monaco", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        hospAdminPwd.setBackground(null);
+        hospAdminPwd.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        hospAdminPwd.setForeground(new java.awt.Color(25, 118, 211));
+
+        jLabel4.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(25, 118, 211));
         jLabel4.setText("Hospital Name");
 
-        jLabel7.setFont(new java.awt.Font("Monaco", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(25, 118, 211));
         jLabel7.setText("Password");
 
-        jLabel8.setFont(new java.awt.Font("Monaco", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(25, 118, 211));
         jLabel8.setText("Username");
 
-        jLabel5.setFont(new java.awt.Font("Monaco", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(25, 118, 211));
         jLabel5.setText("Hospital City");
 
-        jLabel3.setFont(new java.awt.Font("Monaco", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        hospCity.setBackground(null);
+        hospCity.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        hospCity.setForeground(new java.awt.Color(25, 118, 211));
+
+        jLabel3.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(25, 118, 211));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Hospital Admin Credentials");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(30, 246, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(258, 258, 258))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -117,9 +139,9 @@ public class CreateHospitalPanel extends javax.swing.JPanel {
                             .addComponent(jLabel5))
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hospID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(hospName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hospCity, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(hospCity, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hospID, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(253, 253, 253)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -130,18 +152,18 @@ public class CreateHospitalPanel extends javax.swing.JPanel {
                             .addComponent(hospAdminUserName)
                             .addComponent(hospAdminPwd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(203, 203, 203)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(282, 282, 282)
-                        .addComponent(createHospBtn)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(createHospBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {hospAdminPwd, hospAdminUserName, hospCity, hospID, hospName});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel1)
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -156,9 +178,9 @@ public class CreateHospitalPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(hospCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
-                .addComponent(jLabel3)
-                .addGap(37, 37, 37)
+                .addGap(50, 50, 50)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(hospAdminUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -167,9 +189,12 @@ public class CreateHospitalPanel extends javax.swing.JPanel {
                     .addComponent(jLabel7)
                     .addComponent(hospAdminPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
-                .addComponent(createHospBtn)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addComponent(createHospBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(114, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {hospAdminPwd, hospAdminUserName, hospCity, hospID, hospName});
+
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -217,7 +242,7 @@ public class CreateHospitalPanel extends javax.swing.JPanel {
 
         Long userId = (long) (Math.random() * (9999 - 1) + 1);
         String hospQuery = "INSERT INTO project.hospital VALUES  (?, ?, ?);";
-        String userQuery = "INSERT INTO project.credentials VALUES (?, ?, ?, ?);";
+        String userQuery = "INSERT INTO project.credentials VALUES (?, ?, ?, ?, ?);";
 
         Hospital hosp = new Hospital();
         hosp.setHospitalId(hospId);
@@ -229,6 +254,7 @@ public class CreateHospitalPanel extends javax.swing.JPanel {
         creds.setUsername(hospAdminUserName.getText());
         creds.setPassword(String.valueOf(hospAdminPwd.getPassword()));
         creds.setRole("Hospital Admin");
+        creds.setLicense("license");
 
         try {
             dbConn = db.getConnection();
@@ -244,8 +270,10 @@ public class CreateHospitalPanel extends javax.swing.JPanel {
                 userStatement.setString(2, creds.getUsername());
                 userStatement.setString(3, creds.getPassword());
                 userStatement.setString(4, creds.getRole());
+                userStatement.setString(5, creds.getLicense());
                 if ((docStatement.executeUpdate() > 0) && userStatement.executeUpdate() > 0) {
                     System.out.println("Created Hospital Successfully!");
+                    JOptionPane.showMessageDialog(this, "Created Successfully");
                     dbConn.commit();
                 } else {
                     System.out.println("Failed to create hospital");

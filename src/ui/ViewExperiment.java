@@ -4,7 +4,7 @@
  */
 package ui;
 
-import Model.system.DatabaseConnection;
+import Model.System.DatabaseConnection;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;

@@ -4,17 +4,37 @@
  */
 package ui.University_Admin;
 
+import Model.Collab.RequestCollab;
+import Model.System.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ui.Laboratories.CreateTester;
+
 /**
  *
  * @author vidhisejpal
  */
 public class MonitorCollabration extends javax.swing.JPanel {
 
+    Long uniID;
+
     /**
      * Creates new form MonitorCollabration
      */
+    Logger logger = LogManager.getLogger(MonitorCollabration.class);
+    Connection dbConn = null;
+    DatabaseConnection db = new DatabaseConnection();
+
     public MonitorCollabration() {
+        uniID = 0L;
         initComponents();
+        populateTable();
     }
 
     /**
@@ -75,6 +95,11 @@ public class MonitorCollabration extends javax.swing.JPanel {
         confirmButton.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
         confirmButton.setForeground(new java.awt.Color(255, 255, 255));
         confirmButton.setText("Confirm");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -114,6 +139,124 @@ public class MonitorCollabration extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        // TODO add your handling code here:
+        int rowIndex = jTable1.getSelectedRow();
+
+        if (rowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Exp to confirm!");
+            return;
+        }
+
+        if (jTable1.getSelectedRowCount() > 1) {
+            JOptionPane.showMessageDialog(this, "Please select only 1 Exp to confirm!");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        //Long id= Long.valueOf(TOOL_TIP_TEXT_KEY) model.getValueAt(selectedRowIndex,0);
+        String expName = String.valueOf(model.getValueAt(rowIndex, 1));
+        Connection dbConn = null;
+        PreparedStatement manufStatement = null;
+        String updQuery = "UPDATE request_collab SET approval = ? WHERE expName = ?;";
+        String app = jComboBox1.getSelectedItem().toString();
+        
+        try {
+            dbConn = db.getConnection();
+            if (dbConn != null) {
+
+                dbConn.setAutoCommit(false);
+                manufStatement = dbConn.prepareStatement(updQuery);
+                manufStatement.setString(1, app);
+                manufStatement.setString(2, expName);
+
+                if (manufStatement.executeUpdate() > 0) {
+                    System.out.println("Approved!");
+                    JOptionPane.showMessageDialog(this, "Approved!");
+                    dbConn.commit();
+                } else {
+                    System.out.println("Not Approved");
+                    JOptionPane.showMessageDialog(this, "Not Approved!");
+                    dbConn.rollback();
+                }
+            } else {
+                System.out.println("DB connection not connected");
+            }
+        } catch (SQLException sqlExp) {
+            //rollback the connection
+            sqlExp.printStackTrace();
+        } catch (Exception exp) {
+            exp.printStackTrace();
+
+        } finally {
+            if (manufStatement != null) {
+                try {
+                    if (!manufStatement.isClosed()) {
+                        manufStatement.close();
+                    }
+                } catch (SQLException err) {
+                    err.printStackTrace();
+
+                }
+            }
+            if (dbConn != null) {
+                try {
+                    if (!dbConn.isClosed()) {
+                        db.closeConnection(dbConn);
+                    }
+                } catch (SQLException err) {
+                    err.printStackTrace();
+                }
+            }
+        }
+        populateTable();
+    }//GEN-LAST:event_confirmButtonActionPerformed
+
+    private void populateTable() {
+        DatabaseConnection db = new DatabaseConnection();
+        Connection dbConn = null;
+        PreparedStatement sqlStatement = null;
+        ResultSet dbResult = null;
+        try {
+            dbConn = db.getConnection();
+            if (dbConn != null) {
+                sqlStatement = dbConn.prepareStatement("SELECT universityName, expName, reason, approval FROM request_collab WHERE uniIdToReq = ?;");
+
+                dbResult = sqlStatement.executeQuery();
+                if (!dbResult.next()) {
+                    System.out.println("No data");
+                } else {
+                    fillTable(dbResult);
+                }
+
+            } else {
+                System.out.println("connection not done");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (sqlStatement != null) {
+                try {
+                    if (!sqlStatement.isClosed()) {
+                        sqlStatement.close();
+                    }
+
+                } catch (SQLException err) {
+                    err.printStackTrace();
+
+                }
+            }
+            if (dbConn != null) {
+                try {
+                    if (!dbConn.isClosed()) {
+                        db.closeConnection(dbConn);
+                    }
+                } catch (SQLException err) {
+                    err.printStackTrace();
+
+                }
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton confirmButton;
@@ -123,4 +266,25 @@ public class MonitorCollabration extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private void fillTable(ResultSet dbResult) throws SQLException {
+        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+
+        tableModel.setRowCount(0);
+
+        do {
+            RequestCollab req = new RequestCollab();
+            req.setUniversityName(dbResult.getString(1));
+            req.setExpName(dbResult.getString(2));
+            req.setReason(dbResult.getString(3));
+            req.setApproval(dbResult.getString(4));
+
+            Object[] tblRow = new Object[3];
+            tblRow[0] = req.getUniversityName();
+            tblRow[1] = req.getExpName();
+            tblRow[2] = req.getReason();
+            tblRow[3] = req.getApproval();
+            tableModel.addRow(tblRow);
+        } while (dbResult.next());
+    }
 }

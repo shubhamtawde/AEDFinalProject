@@ -21,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -34,7 +36,7 @@ public class TesterPanel extends javax.swing.JPanel {
     Connection dbConn = null;
     PreparedStatement sqlStatement = null;
     String photo;
-
+    Logger logger = LogManager.getLogger(TesterPanel.class);
     public TesterPanel() {
         initComponents();
         findTableData();
@@ -297,6 +299,7 @@ public class TesterPanel extends javax.swing.JPanel {
                 }
             } catch (Exception e) {
                 System.out.println(e);
+                logger.error(e);
             } finally {
                 if (sqlStatement != null) {
                     try {
@@ -306,7 +309,7 @@ public class TesterPanel extends javax.swing.JPanel {
 
                     } catch (SQLException err) {
                         err.printStackTrace();
-
+                        logger.error(err);
                     }
                 }
                 if (dbConn != null) {
@@ -316,7 +319,7 @@ public class TesterPanel extends javax.swing.JPanel {
                         }
                     } catch (SQLException err) {
                         err.printStackTrace();
-
+                        logger.error(err);
                     }
                 }
             }
@@ -371,6 +374,7 @@ public class TesterPanel extends javax.swing.JPanel {
                 }
             } catch (Exception e) {
                 System.out.println(e);
+                logger.error(e);
             } finally {
                 if (sqlStatement != null) {
                     try {
@@ -380,6 +384,7 @@ public class TesterPanel extends javax.swing.JPanel {
 
                     } catch (SQLException err) {
                         err.printStackTrace();
+                        logger.error(err);
 
                     }
                 }
@@ -390,6 +395,7 @@ public class TesterPanel extends javax.swing.JPanel {
                         }
                     } catch (SQLException err) {
                         err.printStackTrace();
+                        logger.error(err);
 
                     }
                 }
@@ -479,6 +485,7 @@ public class TesterPanel extends javax.swing.JPanel {
             }
         } catch (Exception e) {
             System.out.println(e);
+            logger.error(e);
         } finally {
             if (sqlStatement != null) {
                 try {
@@ -488,6 +495,7 @@ public class TesterPanel extends javax.swing.JPanel {
 
                 } catch (SQLException err) {
                     err.printStackTrace();
+                    logger.error(err);
 
                 }
             }
@@ -498,6 +506,7 @@ public class TesterPanel extends javax.swing.JPanel {
                     }
                 } catch (SQLException err) {
                     err.printStackTrace();
+                    logger.error(err);
 
                 }
             }

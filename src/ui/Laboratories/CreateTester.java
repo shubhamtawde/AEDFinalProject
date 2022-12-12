@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -25,7 +27,7 @@ public class CreateTester extends javax.swing.JPanel {
     Connection dbConn = null;
     PreparedStatement sqlStatement = null;
     PreparedStatement sqlStatement1 = null;
-
+    Logger logger = LogManager.getLogger(CreateTester.class);
     public CreateTester() {
         initComponents();
     }
@@ -229,6 +231,7 @@ public class CreateTester extends javax.swing.JPanel {
             }
         } catch (Exception e) {
             System.out.println(e);
+            logger.error(e);
         } finally {
             if (sqlStatement != null && sqlStatement1 != null) {
                 try {
@@ -240,6 +243,7 @@ public class CreateTester extends javax.swing.JPanel {
                     }
                 } catch (SQLException err) {
                     err.printStackTrace();
+                    logger.error(err);
 
                 }
             }
@@ -250,6 +254,7 @@ public class CreateTester extends javax.swing.JPanel {
                     }
                 } catch (SQLException err) {
                     err.printStackTrace();
+                    logger.error(err);
 
                 }
             }

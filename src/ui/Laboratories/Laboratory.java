@@ -4,6 +4,9 @@
  */
 package ui.Laboratories;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  *
  * @author vidhisejpal
@@ -13,6 +16,8 @@ public class Laboratory extends javax.swing.JFrame {
     /**
      * Creates new form Laboratory
      */
+    
+    Logger logger = LogManager.getLogger(Laboratory.class);
     public Laboratory() {
         initComponents();
     }

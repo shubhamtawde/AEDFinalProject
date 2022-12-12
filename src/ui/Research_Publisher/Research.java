@@ -11,6 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ui.Laboratories.CreateTester;
 
 /**
  *
@@ -24,7 +27,7 @@ public class Research extends javax.swing.JFrame {
     Connection dbConn = null;
     ResultSet dbResult = null;
     PreparedStatement sqlStatement = null;
-
+    Logger logger = LogManager.getLogger(Research.class);
     public Research() {
         initComponents();
     }

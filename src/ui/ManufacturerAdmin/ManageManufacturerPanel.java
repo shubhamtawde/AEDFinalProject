@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Model.Credentials.Credentials;
 import Model.Manufacturer.Manufacturer;
-import model.Doctor.Doctor;
-import model.Hospital.Hospital;
+import Model.Doctor.Doctor;
+import Model.Hospital.Hospital;
 import Model.Manufacturer.Manufacturer;
 import Model.System.DatabaseConnection;
 

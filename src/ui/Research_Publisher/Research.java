@@ -173,6 +173,7 @@ public class Research extends javax.swing.JFrame {
                 }
             } catch (Exception e) {
                 System.out.println(e);
+                logger.error(e);
             } finally {
                 if (sqlStatement != null) {
                     try {
@@ -181,6 +182,7 @@ public class Research extends javax.swing.JFrame {
                         }
                     } catch (SQLException err) {
                         err.printStackTrace();
+                        logger.error(err);
 
                     }
                 }
@@ -191,6 +193,7 @@ public class Research extends javax.swing.JFrame {
                         }
                     } catch (SQLException err) {
                         err.printStackTrace();
+                        logger.error(err);
 
                     }
                 }
@@ -239,6 +242,7 @@ public class Research extends javax.swing.JFrame {
                 }
             } catch (Exception e) {
                 System.out.println(e);
+                logger.error(e);
             } finally {
                 if (sqlStatement != null) {
                     try {
@@ -248,6 +252,7 @@ public class Research extends javax.swing.JFrame {
 
                     } catch (SQLException err) {
                         err.printStackTrace();
+                        logger.error(err);
 
                     }
                 }
@@ -258,6 +263,7 @@ public class Research extends javax.swing.JFrame {
                         }
                     } catch (SQLException err) {
                         err.printStackTrace();
+                        logger.error(err);
 
                     }
                 }
@@ -328,6 +334,7 @@ public class Research extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             System.out.println(e);
+            logger.error(e);
         }
 
     }

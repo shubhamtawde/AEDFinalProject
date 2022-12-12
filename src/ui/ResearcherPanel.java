@@ -4,6 +4,9 @@
  */
 package ui;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  *
  * @author siddharthvaghela
@@ -14,6 +17,7 @@ public class ResearcherPanel extends javax.swing.JFrame {
      * Creates new form ResearcherPanel
      */
     public Long id;
+         Logger logger = LogManager.getLogger(ResearcherPanel.class);
     public ResearcherPanel() {
         initComponents();
         

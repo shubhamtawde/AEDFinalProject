@@ -173,8 +173,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
        String reg="[a-zA-Z]+";
        String regex = "^(.+)@(.+)$";
        String dateRegex = "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$";
-       String emailRegex =        "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+       String emailRegex ="^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$";
        
        if(!licenseDate.getText().matches(dateRegex))
        {
@@ -182,11 +181,11 @@ public class CreateEnterprise extends javax.swing.JPanel {
                   JOptionPane.showMessageDialog(this, "Please Enter data in proper format MM/dd/yyyy");
                   return;
        }
-      /* if(enterpriseEmail.getText().matches(emailRegex))
+       if(!enterpriseEmail.getText().matches(emailRegex))
        {
            JOptionPane.showMessageDialog(this, "Please Enter Email in proper format");
                   return;
-       }*/
+       }
        
        
         DatabaseConnection db = new DatabaseConnection();

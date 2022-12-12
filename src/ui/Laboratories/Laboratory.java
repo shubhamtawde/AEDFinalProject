@@ -207,7 +207,7 @@ public class Laboratory extends javax.swing.JFrame {
     private void testerPanelButttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testerPanelButttonActionPerformed
         // TODO add your handling code here:
         TesterPanel testerPanel = new TesterPanel();
-        SplitPane.setRightComponent(testerPanel);
+        SplitPane.setRightComponent(testerPanel); // adding split panel
     }//GEN-LAST:event_testerPanelButttonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed

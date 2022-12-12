@@ -162,7 +162,7 @@ public class CreateResearcher extends javax.swing.JPanel {
            String reg="[a-zA-Z]+";
        String regex = "^(.+)@(.+)$";
        String dateRegex = "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$";
-        String emailRegex ="^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$";
+        String emailRegex ="^(.+)@(.+)$";
        
         DatabaseConnection db = new DatabaseConnection();
 

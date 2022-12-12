@@ -15,11 +15,15 @@ import org.apache.logging.log4j.Logger;
 import ui.Admin.AdminHomePanel;
 import ui.Doctor.DoctorHomePanel;
 import ui.HospitalAdmin.HospitalAdminHome;
+import ui.Laboratories.Laboratory;
+import ui.Laboratories.TesterHomePanel;
+import ui.Laboratories.TesterPanel;
 import ui.PharmaAdmin.PharmaAdminHomePanel;
 import ui.ResearchAdmin;
 import ui.Research_Publisher.Research;
 import ui.ResearcherPanel;
 import ui.SystemAdmin;
+import ui.University_Admin.UniversityAdmin;
 
 /**
  *
@@ -220,8 +224,9 @@ public class MainFrame extends javax.swing.JFrame {
                     logger.info("inside uni if");
                     logger.error("this is error messsage ");
 
-                    ResearchAdmin researchAdmin = new ResearchAdmin(dbResult.getLong(1));
-                    researchAdmin.setVisible(true);
+                    UniversityAdmin uniAdmin = new UniversityAdmin();
+                    uniAdmin.uniId = dbResult.getLong(1);
+                    uniAdmin.setVisible(true);
                     setVisible(false);
 
                 } else if (dbResult.getString(4).equals("Researcher")) {
@@ -237,6 +242,7 @@ public class MainFrame extends javax.swing.JFrame {
                     setVisible(false);
                 } else if (dbResult.getString(4).equals("Doctor")) {
                     DoctorHomePanel doc = new DoctorHomePanel();
+                    doc.id = dbResult.getLong(1);
                     doc.setVisible(true);
                     setVisible(false);
                 } else if (dbResult.getString(4).equals("Admin")) {
@@ -258,6 +264,7 @@ public class MainFrame extends javax.swing.JFrame {
                 else if (dbResult.getString(4).equals("Pharma Admin")) {
                     logger.info("inside uni if");
                     PharmaAdminHomePanel researchPanel = new PharmaAdminHomePanel();
+                    researchPanel.id = dbResult.getLong(1);
                     researchPanel.setVisible(true);
                     setVisible(false);
                 }
@@ -267,6 +274,20 @@ public class MainFrame extends javax.swing.JFrame {
                     res.setVisible(true);
                     setVisible(false);
                 }
+                else if (dbResult.getString(4).equals("Lab Admin")) {
+                    logger.info("inside uni if");
+                    Laboratory lab = new Laboratory();
+                    lab.id = dbResult.getLong(1);
+                    lab.setVisible(true);
+                    setVisible(false);
+                }
+                else if (dbResult.getString(4).equals("Tester")) {
+                    logger.info("inside uni if");
+                    TesterHomePanel test = new TesterHomePanel();
+                    test.setVisible(true);
+                    setVisible(false);
+                }
+                
 
             } else {
                 logger.error("DB Connection not done");

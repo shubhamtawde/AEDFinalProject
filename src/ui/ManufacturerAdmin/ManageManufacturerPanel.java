@@ -13,9 +13,10 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Model.Credentials.Credentials;
+import Model.Manufacturer.Manufacturer;
 import model.Doctor.Doctor;
 import model.Hospital.Hospital;
-import model.Manufacturer.Manufacturer;
+import Model.Manufacturer.Manufacturer;
 import Model.System.DatabaseConnection;
 
 /**
@@ -320,7 +321,7 @@ public class ManageManufacturerPanel extends javax.swing.JPanel {
         ResultSet dbResult = null;
         PreparedStatement sqlStatement = null;
         Long hospitalId = (long) (Math.random() * (9999 - 1) + 1);
-        String sqlQuery = "SELECT * FROM project.hospital;";
+        String sqlQuery = "SELECT * FROM project.manufacturer;";
         try {
             dbConn = db.getConnection();
             if (dbConn != null) {
@@ -371,14 +372,13 @@ public class ManageManufacturerPanel extends javax.swing.JPanel {
         tableModel.setRowCount(0);
 
         do {
-            Hospital hosp = new Hospital();
-            hosp.setHospitalId(dbResult.getLong(1));
-            hosp.setHospitalName(dbResult.getString(2));
-            hosp.setHospitalCity(dbResult.getString(3));
+            Manufacturer manu = new Manufacturer();
+            manu.setManufacturerId(dbResult.getLong(1));
+            manu.setManufacturerName(dbResult.getString(2));
+            
             Object[] tblRow = new Object[3];
-            tblRow[0] = hosp;
-            tblRow[1] = hosp.getHospitalId();
-            tblRow[2] = hosp.getHospitalCity();
+            tblRow[0] = manu;
+            tblRow[1] = manu.getManufacturerId();
             tableModel.addRow(tblRow);
         } while (dbResult.next());
     }

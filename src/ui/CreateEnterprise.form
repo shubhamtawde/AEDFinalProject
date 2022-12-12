@@ -36,8 +36,8 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="usernameEnterprise" alignment="0" max="32767" attributes="0"/>
                           <Component id="enterpriseCategory" alignment="0" max="32767" attributes="0"/>
-                          <Component id="enterpriseEmail" max="32767" attributes="0"/>
                           <Component id="enterpriseName" max="32767" attributes="0"/>
+                          <Component id="enterpriseEmail" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -45,13 +45,20 @@
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="passwordEnterprise" max="32767" attributes="0"/>
-                          <Component id="licenseDate" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="saveEnterpriseButton" min="-2" pref="165" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="licenseDate" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="saveEnterpriseButton" min="-2" pref="165" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="passwordEnterprise" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -85,12 +92,12 @@
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="enterpriseEmail" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="passwordEnterprise" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="licenseDate" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -152,11 +159,6 @@
     <Component class="javax.swing.JTextField" name="usernameEnterprise">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="usernameEnterpriseActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="passwordEnterprise">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passwordEnterpriseActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="saveEnterpriseButton">
@@ -238,6 +240,8 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Create Enterprise"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="passwordEnterprise">
     </Component>
   </SubComponents>
 </Form>

@@ -46,7 +46,6 @@ public class CreateEnterprise extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         enterpriseName = new javax.swing.JTextField();
         usernameEnterprise = new javax.swing.JTextField();
-        passwordEnterprise = new javax.swing.JTextField();
         saveEnterpriseButton = new javax.swing.JButton();
         enterpriseCategory = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
@@ -54,6 +53,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         enterpriseEmail = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        passwordEnterprise = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -76,12 +76,6 @@ public class CreateEnterprise extends javax.swing.JPanel {
         usernameEnterprise.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameEnterpriseActionPerformed(evt);
-            }
-        });
-
-        passwordEnterprise.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordEnterpriseActionPerformed(evt);
             }
         });
 
@@ -131,19 +125,23 @@ public class CreateEnterprise extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(usernameEnterprise)
                             .addComponent(enterpriseCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(enterpriseEmail)
-                            .addComponent(enterpriseName)))
+                            .addComponent(enterpriseName)
+                            .addComponent(enterpriseEmail)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passwordEnterprise)
-                            .addComponent(licenseDate)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(saveEnterpriseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(licenseDate)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(saveEnterpriseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(passwordEnterprise)))))
                 .addGap(267, 267, 267))
         );
         layout.setVerticalGroup(
@@ -167,11 +165,11 @@ public class CreateEnterprise extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(enterpriseEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(passwordEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(licenseDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -188,10 +186,6 @@ public class CreateEnterprise extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameEnterpriseActionPerformed
 
-    private void passwordEnterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordEnterpriseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordEnterpriseActionPerformed
-
     private void saveEnterpriseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveEnterpriseButtonActionPerformed
         // TODO add your handling code here:
         
@@ -205,7 +199,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
        String reg="[a-zA-Z]+";
        String regex = "^(.+)@(.+)$";
        String dateRegex = "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$";
-       String emailRegex ="^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$";
+       String emailRegex ="^(.+)@(.+)$";
        
        if(!licenseDate.getText().matches(dateRegex))
        {
@@ -265,6 +259,11 @@ public class CreateEnterprise extends javax.swing.JPanel {
                     s.sendMail(enterpriseEmail.getText());
                     System.out.println("commited");
                     JOptionPane.showMessageDialog(this, "Created Enterprise Successfully");
+                    enterpriseName.setText("");
+                    enterpriseEmail.setText("");
+                    usernameEnterprise.setText("");
+                    passwordEnterprise.setText("");
+                    licenseDate.setText("");
                     dbConn.commit();
                 } else {
                     System.out.println("not commited");
@@ -318,7 +317,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField licenseDate;
-    private javax.swing.JTextField passwordEnterprise;
+    private javax.swing.JPasswordField passwordEnterprise;
     private javax.swing.JButton saveEnterpriseButton;
     private javax.swing.JTextField usernameEnterprise;
     // End of variables declaration//GEN-END:variables

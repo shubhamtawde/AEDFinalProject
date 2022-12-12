@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Model.Credentials.Credentials;
-import model.Hospital.Hospital;
+import Model.Hospital.Hospital;
 import Model.System.DatabaseConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

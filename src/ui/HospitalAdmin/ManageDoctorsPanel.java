@@ -4,6 +4,7 @@
  */
 package ui.HospitalAdmin;
 
+import Model.Doctor.Doctor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,8 +12,8 @@ import java.sql.SQLException;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Doctor.Doctor;
-import model.Hospital.Hospital;
+import Model.Doctor.Doctor;
+import Model.Hospital.Hospital;
 import Model.System.DatabaseConnection;
 
 /**
@@ -386,12 +387,95 @@ public class ManageDoctorsPanel extends javax.swing.JPanel {
 
     private void deleteDocBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDocBtnActionPerformed
         // TODO add your handling code here:
+        int rowIndex = doctorTable.getSelectedRow();
+
+        if (rowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a doctor to delete!");
+            return;
+        }
+
+        if (doctorTable.getSelectedRowCount() > 1) {
+            JOptionPane.showMessageDialog(this, "Please select only 1 doctor to delete!");
+            return;
+        }
+
+        DefaultTableModel tableModel = (DefaultTableModel) doctorTable.getModel();
+        Doctor toDelDoc = (Doctor) tableModel.getValueAt(rowIndex, 0);
+
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this Hospital;?", "Delete Hospital Confirmation", JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION) {
+            //delete employee
+            delDoc(toDelDoc);
+
+            JOptionPane.showMessageDialog(this, "Hospital Deleted Successfully!");
+            //populate table to refresh the deleted record
+            populateTable();
+        }
     }//GEN-LAST:event_deleteDocBtnActionPerformed
 
     private void showDoctor(Doctor toUpdDoctor) {
         docId.setText(String.valueOf(toUpdDoctor.getDoctorId()));
         docName.setText(toUpdDoctor.getDoctorName());
         hospName.setText(toUpdDoctor.getHospitalName());
+    }
+    
+    private void delDoc(Doctor toDelDoc) {
+
+        Connection dbConn = null;
+        PreparedStatement hospStatement = null;
+
+        String hospQuery = "DELETE FROM project.doctors WHERE doctorId = ?;";
+
+
+        try {
+            dbConn = db.getConnection();
+            if (dbConn != null) {
+                dbConn.setAutoCommit(false);
+                hospStatement = dbConn.prepareStatement(hospQuery);
+                hospStatement.setLong(1, toDelDoc.getDoctorId());
+
+                
+                if (hospStatement.executeUpdate() > 0) {
+                    System.out.println("Deleted Doctor Successfully!");
+                    JOptionPane.showMessageDialog(this, "Deleted Doctor Successfully!");
+                    dbConn.commit();
+                } else {
+                    System.out.println("Failed to delete Doctor");
+                    JOptionPane.showMessageDialog(this, "Failed to delete Doctor!");
+                    dbConn.rollback();
+                }
+            } else {
+                System.out.println("DB connection not connected");
+            }
+        } catch (SQLException sqlExp) {
+            //rollback the connection
+            sqlExp.printStackTrace();
+        } catch (Exception exp) {
+            exp.printStackTrace();
+
+        } finally {
+            if (hospStatement != null) {
+                try {
+                    if (!hospStatement.isClosed()) {
+                        hospStatement.close();
+                    }
+                } catch (SQLException err) {
+                    err.printStackTrace();
+
+                }
+            }
+            if (dbConn != null) {
+                try {
+                    if (!dbConn.isClosed()) {
+                        db.closeConnection(dbConn);
+                    }
+                } catch (SQLException err) {
+                    err.printStackTrace();
+
+                }
+            }
+        }
+        populateTable();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

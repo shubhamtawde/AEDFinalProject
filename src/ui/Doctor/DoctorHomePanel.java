@@ -7,6 +7,8 @@ package ui.Doctor;
 import loginform.MainFrame;
 import ui.HospitalAdmin.*;
 import ui.*;
+import ui.Laboratories.MonitorTester;
+import ui.Laboratories.TesterHomePanel;
 
 /**
  *
@@ -14,11 +16,13 @@ import ui.*;
  */
 public class DoctorHomePanel extends javax.swing.JFrame {
 
+    public Long id;
     /**
      * Creates new form UniversityAdmin
      */
     public DoctorHomePanel() {
         initComponents();
+        id = 0L;
     }
 
     /**
@@ -160,14 +164,14 @@ public class DoctorHomePanel extends javax.swing.JFrame {
 
     private void reqTestResultBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reqTestResultBtnActionPerformed
         // TODO add your handling code here:
-      RequestTestResult req = new RequestTestResult();
+      RequestTestResult req = new RequestTestResult(id);
       SplitPane1.setRightComponent(req);
     }//GEN-LAST:event_reqTestResultBtnActionPerformed
 
     private void monitorTestResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monitorTestResultActionPerformed
         // TODO add your handling code here:
-        ManageDoctorsPanel doc = new ManageDoctorsPanel();
-        SplitPane1.setRightComponent(doc);
+        MonitorTestResultPanel test = new MonitorTestResultPanel(id);
+        SplitPane1.setRightComponent(test);
     }//GEN-LAST:event_monitorTestResultActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed

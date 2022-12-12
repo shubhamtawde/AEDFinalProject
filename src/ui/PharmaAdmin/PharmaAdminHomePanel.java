@@ -15,11 +15,13 @@ import ui.ManufacturerAdmin.ManageManufacturerPanel;
  */
 public class PharmaAdminHomePanel extends javax.swing.JFrame {
 
+    public Long id;
     /**
      * Creates new form UniversityAdmin
      */
     public PharmaAdminHomePanel() {
         initComponents();
+        id = 0L;
     }
 
     /**
@@ -192,7 +194,7 @@ public class PharmaAdminHomePanel extends javax.swing.JFrame {
 
     private void createResBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createResBtnActionPerformed
         // TODO add your handling code here:
-      CreateResearcher res = new CreateResearcher(576L);
+      CreateResearcher res = new CreateResearcher(id);
       SplitPane1.setRightComponent(res);
     }//GEN-LAST:event_createResBtnActionPerformed
 

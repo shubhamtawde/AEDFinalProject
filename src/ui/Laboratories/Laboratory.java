@@ -16,6 +16,7 @@ import ui.MonitorResearcher;
  */
 public class Laboratory extends javax.swing.JFrame {
 
+    public Long id;
     /**
      * Creates new form Laboratory
      */
@@ -23,6 +24,7 @@ public class Laboratory extends javax.swing.JFrame {
     Logger logger = LogManager.getLogger(Laboratory.class);
     public Laboratory() {
         initComponents();
+        id = 0L;
     }
 
     /**
@@ -232,7 +234,7 @@ public class Laboratory extends javax.swing.JFrame {
 
     private void createResearcherButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createResearcherButtonActionPerformed
         // TODO add your handling code here:
-        CreateResearcher cr = new CreateResearcher(879L);
+        CreateResearcher cr = new CreateResearcher(id);
         SplitPane.setRightComponent(cr); 
     }//GEN-LAST:event_createResearcherButtonActionPerformed
 

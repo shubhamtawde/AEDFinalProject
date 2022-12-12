@@ -12,8 +12,8 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Model.Credentials.Credentials;
-import model.Doctor.Doctor;
-import model.Hospital.Hospital;
+import Model.Doctor.Doctor;
+import Model.Hospital.Hospital;
 import Model.System.DatabaseConnection;
 
 /**
@@ -438,20 +438,13 @@ public class ManageHospitalPanel extends javax.swing.JPanel {
 
         String hospQuery = "DELETE FROM project.hospital WHERE hospitalId =  ?;";
 
-        Hospital hosp = new Hospital();
-        hosp.setHospitalId(Long.valueOf(hospId.getText()));
-        hosp.setHospitalName(hospName.getText());
-        hosp.setHospitalCity(hospCity.getText());
-
 
         try {
             dbConn = db.getConnection();
             if (dbConn != null) {
                 dbConn.setAutoCommit(false);
                 hospStatement = dbConn.prepareStatement(hospQuery);
-                hospStatement.setLong(1, hosp.getHospitalId());
-                hospStatement.setString(2, hosp.getHospitalName());
-                hospStatement.setString(3, hosp.getHospitalCity());
+                hospStatement.setLong(1, toDelHospital.getHospitalId());
 
                 
                 if (hospStatement.executeUpdate() > 0) {

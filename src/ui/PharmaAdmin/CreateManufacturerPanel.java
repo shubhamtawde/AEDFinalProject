@@ -14,9 +14,9 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Model.Credentials.Credentials;
-import model.Doctor.Doctor;
-import model.Hospital.Hospital;
-import model.Manufacturer.Manufacturer;
+import Model.Doctor.Doctor;
+import Model.Hospital.Hospital;
+import Model.Manufacturer.Manufacturer;
 import Model.System.DatabaseConnection;
 
 /**

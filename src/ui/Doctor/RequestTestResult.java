@@ -17,12 +17,16 @@ import Model.System.DatabaseConnection;
  */
 public class RequestTestResult extends javax.swing.JPanel {
 
+    Long docID;
+    Long rId;
     DatabaseConnection db = new DatabaseConnection();
     /**
      * Creates new form RequestTestResult
      */
-    public RequestTestResult() {
+    public RequestTestResult(Long docID) {
         initComponents();
+        this.docID = docID;
+        docId.setText(String.valueOf(docID));
     }
 
     /**
@@ -74,6 +78,8 @@ public class RequestTestResult extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(25, 118, 211));
         jLabel7.setText("Date");
+
+        docId.setEditable(false);
 
         testName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,7 +199,7 @@ public class RequestTestResult extends javax.swing.JPanel {
         Connection dbConn = null;
         PreparedStatement sqlStatement = null;
         Long resId = (long) (Math.random() * (9999 - 1) + 1);
-        String sqlQuery = "INSERT INTO project.test_result VALUES  (?, ?, ?, ?, ?, ?, ?);";
+        String sqlQuery = "INSERT INTO project.TestResult VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         try {
             dbConn = db.getConnection();
@@ -201,12 +207,16 @@ public class RequestTestResult extends javax.swing.JPanel {
                 dbConn.setAutoCommit(false);
                 sqlStatement = dbConn.prepareStatement(sqlQuery);
                 sqlStatement.setLong(1, resId);
-                sqlStatement.setString(2, docId.getText());
+                sqlStatement.setLong(2, docID);
                 sqlStatement.setString(3, docName.getText());
                 sqlStatement.setString(4, testName.getText());
                 sqlStatement.setString(5, patientName.getText());
                 sqlStatement.setString(6, date.getText());
                 sqlStatement.setString(7, "");
+                sqlStatement.setString(8, "");
+                sqlStatement.setString(9, "");
+                sqlStatement.setString(10, "");
+                sqlStatement.setString(11, "");
                 
                 if (sqlStatement.executeUpdate() > 0) {
                     JOptionPane.showMessageDialog(this, "Requested Test Result!");

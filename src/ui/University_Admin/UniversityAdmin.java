@@ -5,6 +5,8 @@
 package ui.University_Admin;
 
 import loginform.MainFrame;
+import ui.CreateResearcher;
+import ui.MonitorResearcher;
 
 /**
  *
@@ -12,7 +14,7 @@ import loginform.MainFrame;
  */
 public class UniversityAdmin extends javax.swing.JFrame {
 
-    Long uniId;
+    public Long uniId;
     
     /**
      * Creates new form UniversityAdmin
@@ -103,10 +105,20 @@ public class UniversityAdmin extends javax.swing.JFrame {
         createResearcherButton.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         createResearcherButton.setForeground(new java.awt.Color(25, 118, 211));
         createResearcherButton.setText("Create Researcher");
+        createResearcherButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createResearcherButtonActionPerformed(evt);
+            }
+        });
 
         monitorResearcherButton.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         monitorResearcherButton.setForeground(new java.awt.Color(25, 118, 211));
         monitorResearcherButton.setText("Monitor Researcher");
+        monitorResearcherButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monitorResearcherButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -195,6 +207,18 @@ public class UniversityAdmin extends javax.swing.JFrame {
         m.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void createResearcherButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createResearcherButtonActionPerformed
+        // TODO add your handling code here:
+        CreateResearcher res = new CreateResearcher(uniId);
+        SplitPane1.setRightComponent(res);
+    }//GEN-LAST:event_createResearcherButtonActionPerformed
+
+    private void monitorResearcherButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monitorResearcherButtonActionPerformed
+        // TODO add your handling code here:
+        MonitorResearcher mon = new MonitorResearcher();
+        SplitPane1.setRightComponent(mon);
+    }//GEN-LAST:event_monitorResearcherButtonActionPerformed
 
     /**
      * @param args the command line arguments

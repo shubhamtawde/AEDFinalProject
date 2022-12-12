@@ -167,12 +167,12 @@ public class RequestCollabPanel extends javax.swing.JPanel {
 
     private void reqCollabBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reqCollabBtnActionPerformed
         // TODO add your handling code here:
-        if (uniName.getItemCount() < 0) {
+        if (uniName.getSelectedIndex() < 0) {
             JOptionPane.showMessageDialog(this, "Select Univeristy!");
             return;
         }
 
-        if (expName.getItemCount() < 0) {
+        if (expName.getSelectedIndex() < 0) {
             JOptionPane.showMessageDialog(this, "Select Experiment Name!");
             return;
         }

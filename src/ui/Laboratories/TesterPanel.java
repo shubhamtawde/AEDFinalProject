@@ -5,6 +5,7 @@
 package ui.Laboratories;
 
 import Model.System.DatabaseConnection;
+import Model.TestResult.TestResult;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -264,6 +265,8 @@ public class TesterPanel extends javax.swing.JPanel {
             System.out.println(id);
             DatabaseConnection db = new DatabaseConnection();
             ResultSet dbResult = null;
+            TestResult testRes = new TestResult();
+            testRes.setResultId(id_long);
             try {
                 dbConn = db.getConnection();
                 if (dbConn != null) {
@@ -277,10 +280,15 @@ public class TesterPanel extends javax.swing.JPanel {
                     while (dbResult.next()) {
 
 //                        photo.setText(dbResult.getString(7));
-                        strainDetected.setText(dbResult.getString(8));
-                        sugarDetected.setText(dbResult.getString(9));
-                        vitaminLevel.setText(dbResult.getString(10));
-                        remarks.setText(dbResult.getString(11));
+
+                        testRes.setStrainDetected(dbResult.getString(8));
+                        testRes.setSugarDetected(dbResult.getString(9));
+                        testRes.setVitaminLevel(dbResult.getString(10));
+                        testRes.setRemarks(dbResult.getString(11));
+                        strainDetected.setText(testRes.getStrainDetected());
+                        sugarDetected.setText(testRes.getSugarDetected());
+                        vitaminLevel.setText(testRes.getVitaminLevel());
+                        remarks.setText(testRes.getRemarks());
 
                     }
 
@@ -351,13 +359,12 @@ public class TesterPanel extends javax.swing.JPanel {
 
                     //System.out.println(dbResult.next());
                     //populateTable(dbResult);
-                    
                     findTableData();
                     strainDetected.setText("");
                     sugarDetected.setText("");
                     vitaminLevel.setText("");
                     remarks.setText("");
-                    JOptionPane.showMessageDialog(this,"Test Result Posted Successfully");
+                    JOptionPane.showMessageDialog(this, "Test Result Posted Successfully");
 
                 } else {
                     System.out.println("connection not done");
@@ -426,8 +433,7 @@ public class TesterPanel extends javax.swing.JPanel {
             BufferedImage img = ImageIO.read(new File(photo));
             ImageIcon icon = new ImageIcon(img);
             imageLbl.setIcon(icon);
-        }
-        catch(IOException exp) {
+        } catch (IOException exp) {
             System.out.println("Error occured : " + exp);
         }
         viewDialog.add(imageLbl);

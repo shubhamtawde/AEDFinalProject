@@ -4,12 +4,15 @@
  */
 package ui.Laboratories;
 
+import Model.Credentials.Credentials;
 import Model.System.DatabaseConnection;
+import Model.Tester.Tester;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
+
 /**
  *
  * @author vidhisejpal
@@ -22,6 +25,7 @@ public class CreateTester extends javax.swing.JPanel {
     Connection dbConn = null;
     PreparedStatement sqlStatement = null;
     PreparedStatement sqlStatement1 = null;
+
     public CreateTester() {
         initComponents();
     }
@@ -158,49 +162,59 @@ public class CreateTester extends javax.swing.JPanel {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-        
-        if(name.getText().isEmpty() || emailId.getText().isEmpty() || password.getText().isEmpty()
-                || userName.getText().isEmpty())
-        {
+
+        if (name.getText().isEmpty() || emailId.getText().isEmpty() || password.getText().isEmpty()
+                || userName.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill all the attributes", "Error", JOptionPane.ERROR_MESSAGE);
-              return;
-        }
-        
-        else if (!(Pattern.matches("^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", emailId.getText()))){
+            return;
+        } else if (!(Pattern.matches("^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", emailId.getText()))) {
             JOptionPane.showMessageDialog(null, "Please enter a valid email", "Error", JOptionPane.ERROR_MESSAGE);
-            return ;
+            return;
         }
-        
-        
-        
-        
-                DatabaseConnection db = new DatabaseConnection();
+
+        DatabaseConnection db = new DatabaseConnection();
 
         try {
             dbConn = db.getConnection();
             if (dbConn != null) {
                 dbConn.setAutoCommit(false);
+                Long id = (long) (Math.random() * (9999 - 1) + 1);
+                Tester test = new Tester();
+                test.setTesterId(id);
+                test.setOrgId(id);
+                test.setTesterName(name.getText());
+                test.setTesterEmail(emailId.getText());
+                test.setTesterUsername(userName.getText());
+                test.setTesterPassword(String.valueOf(password.getPassword()));
+                test.setTesterLicense("License date");
+                
+                Credentials cred = new Credentials();
+                cred.setId(id);
+                cred.setUsername(userName.getText());
+                cred.setPassword(String.valueOf(password.getPassword()));
+                cred.setRole("Tester");
+                cred.setLicense("License Date");
+                
                 sqlStatement = dbConn.prepareStatement("INSERT INTO Tester" + " VALUES " + " (?,?,?,?,?,?,?); ");
                 sqlStatement1 = dbConn.prepareStatement("INSERT INTO Credentials" + " VALUES " + " (?,?,?,?,?);");
-                Long id = (long) (Math.random() * (9999 - 1) + 1);
-                sqlStatement.setLong(1, id);
-                sqlStatement.setLong(2, id);
-                sqlStatement.setString(3, name.getText());
-                sqlStatement.setString(4, emailId.getText());
-                sqlStatement.setString(5, userName.getText());
-                sqlStatement.setString(6, String.valueOf(password.getPassword()));
-                sqlStatement.setString(7, "license date"); // license date dummy value
                 
-                
-                sqlStatement1.setLong(1, id);
-                sqlStatement1.setString(2, userName.getText());
-                sqlStatement1.setString(3, String.valueOf(password.getPassword()));
-            
-                sqlStatement1.setString(4, "Tester");
-                sqlStatement1.setString(5, "License Date"); // license date dummy value
-                
+                sqlStatement.setLong(1, test.getTesterId());
+                sqlStatement.setLong(2, test.getOrgId());
+                sqlStatement.setString(3, test.getTesterName());
+                sqlStatement.setString(4, test.getTesterEmail());
+                sqlStatement.setString(5, test.getTesterUsername());
+                sqlStatement.setString(6, test.getTesterPassword());
+                sqlStatement.setString(7, test.getTesterLicense()); // license date dummy value
+
+                sqlStatement1.setLong(1, cred.getId());
+                sqlStatement1.setString(2, cred.getUsername());
+                sqlStatement1.setString(3, cred.getPassword());
+
+                sqlStatement1.setString(4, cred.getRole());
+                sqlStatement1.setString(5, cred.getLicense()); // license date dummy value
+
                 if (sqlStatement.executeUpdate() > 0 && sqlStatement1.executeUpdate() > 0) {
-                    JOptionPane.showMessageDialog(this,"New Tester Added Successfully");
+                    JOptionPane.showMessageDialog(this, "New Tester Added Successfully");
                     System.out.println("commited");
                     dbConn.commit();
                     name.setText("");
@@ -216,7 +230,7 @@ public class CreateTester extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-            if (sqlStatement != null && sqlStatement1 != null ) {
+            if (sqlStatement != null && sqlStatement1 != null) {
                 try {
                     if (!sqlStatement.isClosed()) {
                         sqlStatement.close();
@@ -226,7 +240,7 @@ public class CreateTester extends javax.swing.JPanel {
                     }
                 } catch (SQLException err) {
                     err.printStackTrace();
-                    
+
                 }
             }
             if (dbConn != null) {
@@ -236,7 +250,7 @@ public class CreateTester extends javax.swing.JPanel {
                     }
                 } catch (SQLException err) {
                     err.printStackTrace();
-                   
+
                 }
             }
     }//GEN-LAST:event_saveButtonActionPerformed

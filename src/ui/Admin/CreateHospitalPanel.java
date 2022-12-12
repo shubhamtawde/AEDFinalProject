@@ -14,6 +14,8 @@ import javax.swing.table.DefaultTableModel;
 import model.Credentials.Credentials;
 import model.Hospital.Hospital;
 import model.System.DatabaseConnection;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -21,6 +23,7 @@ import model.System.DatabaseConnection;
  */
 public class CreateHospitalPanel extends javax.swing.JPanel {
 
+    Logger logger = LogManager.getLogger(CreateHospitalPanel.class);
     DatabaseConnection db = new DatabaseConnection();
     Long hospId;
 
@@ -29,7 +32,7 @@ public class CreateHospitalPanel extends javax.swing.JPanel {
      */
     public CreateHospitalPanel() {
         initComponents();
-        hospId =  (long) (Math.random() * (9999 - 1) + 1);
+        hospId = (long) (Math.random() * (9999 - 1) + 1);
         hospID.setText(String.valueOf(hospId));
     }
 
@@ -172,42 +175,42 @@ public class CreateHospitalPanel extends javax.swing.JPanel {
 
     private void createHospBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createHospBtnActionPerformed
         // TODO add your handling code here:
-        if(hospName.getText().trim().equals("")) {
+        if (hospName.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Enter valid input!");
             return;
         }
-        
+
         if (Pattern.matches("^[0-9]*$", hospName.getText())) {
             JOptionPane.showMessageDialog(this, "Name cannot contain numbers!");
             return;
         }
-        
-        if(hospCity.getText().trim().equals("")) {
+
+        if (hospCity.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Enter valid input!");
             return;
         }
-        
+
         if (Pattern.matches("^[0-9]*$", hospCity.getText())) {
             JOptionPane.showMessageDialog(this, "Name cannot contain numbers!");
             return;
         }
-        
-        if(hospAdminUserName.getText().trim().equals("")) {
+
+        if (hospAdminUserName.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Enter hospital admin username!");
             return;
         }
-        
-        if(String.valueOf(hospAdminPwd.getPassword()).trim().equals("")) {
+
+        if (String.valueOf(hospAdminPwd.getPassword()).trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Enter hospital admin passwords!");
             return;
         }
-        
+
         int pwdLen = hospAdminPwd.getPassword().length;
-        if(pwdLen < 6) {
+        if (pwdLen < 6) {
             JOptionPane.showMessageDialog(this, "Password should be minimum 6 characters!");
             return;
         }
-        
+
         Connection dbConn = null;
         PreparedStatement docStatement = null;
         PreparedStatement userStatement = null;
@@ -215,12 +218,12 @@ public class CreateHospitalPanel extends javax.swing.JPanel {
         Long userId = (long) (Math.random() * (9999 - 1) + 1);
         String hospQuery = "INSERT INTO project.hospital VALUES  (?, ?, ?);";
         String userQuery = "INSERT INTO project.credentials VALUES (?, ?, ?, ?);";
-        
+
         Hospital hosp = new Hospital();
         hosp.setHospitalId(hospId);
         hosp.setHospitalName(hospName.getText());
         hosp.setHospitalCity(hospCity.getText());
-        
+
         Credentials creds = new Credentials();
         creds.setUserId(userId);
         creds.setUsername(hospAdminUserName.getText());
@@ -253,8 +256,10 @@ public class CreateHospitalPanel extends javax.swing.JPanel {
             }
         } catch (SQLException sqlExp) {
             //rollback the connection
+            logger.error(sqlExp.getMessage());
             sqlExp.printStackTrace();
         } catch (Exception exp) {
+            logger.error(exp.getMessage());
             exp.printStackTrace();
 
         } finally {
@@ -264,6 +269,7 @@ public class CreateHospitalPanel extends javax.swing.JPanel {
                         docStatement.close();
                     }
                 } catch (SQLException err) {
+                    logger.error(err.getMessage());
                     err.printStackTrace();
 
                 }
@@ -274,6 +280,7 @@ public class CreateHospitalPanel extends javax.swing.JPanel {
                         db.closeConnection(dbConn);
                     }
                 } catch (SQLException err) {
+                    logger.error(err.getMessage());
                     err.printStackTrace();
 
                 }

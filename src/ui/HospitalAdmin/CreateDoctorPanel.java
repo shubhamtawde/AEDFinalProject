@@ -16,6 +16,8 @@ import model.Credentials.Credentials;
 import model.Doctor.Doctor;
 import model.Hospital.Hospital;
 import model.System.DatabaseConnection;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -23,6 +25,7 @@ import model.System.DatabaseConnection;
  */
 public class CreateDoctorPanel extends javax.swing.JPanel {
 
+    Logger logger = LogManager.getLogger(CreateDoctorPanel.class);
     DatabaseConnection db = new DatabaseConnection();
     Long docID;
 
@@ -58,14 +61,23 @@ public class CreateDoctorPanel extends javax.swing.JPanel {
         hospName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(153, 153, 255));
+        setBackground(java.awt.Color.white);
+        setForeground(new java.awt.Color(25, 118, 211));
 
+        jLabel2.setBackground(java.awt.Color.white);
         jLabel2.setFont(new java.awt.Font("Monaco", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Doctor ID");
+        jLabel2.setForeground(new java.awt.Color(25, 118, 211));
+        jLabel2.setText("Doctor ID :");
 
         docId.setEditable(false);
+        docId.setBackground(java.awt.Color.white);
+        docId.setForeground(new java.awt.Color(25, 118, 211));
 
+        docName.setForeground(new java.awt.Color(25, 118, 211));
+
+        createDocBtn.setBackground(new java.awt.Color(25, 118, 211));
+        createDocBtn.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
+        createDocBtn.setForeground(new java.awt.Color(255, 255, 255));
         createDocBtn.setText("Create Doctor");
         createDocBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         createDocBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -74,78 +86,88 @@ public class CreateDoctorPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Monaco", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        docUserName.setForeground(new java.awt.Color(25, 118, 211));
+
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(25, 118, 211));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Create Doctor Panel");
 
+        docPwd.setForeground(new java.awt.Color(25, 118, 211));
+
+        jLabel4.setBackground(java.awt.Color.white);
         jLabel4.setFont(new java.awt.Font("Monaco", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Doctor Name");
+        jLabel4.setForeground(new java.awt.Color(25, 118, 211));
+        jLabel4.setText("Doctor Name :");
 
+        jLabel7.setBackground(java.awt.Color.white);
         jLabel7.setFont(new java.awt.Font("Monaco", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Password");
+        jLabel7.setForeground(new java.awt.Color(25, 118, 211));
+        jLabel7.setText("Password :");
 
+        jLabel8.setBackground(java.awt.Color.white);
         jLabel8.setFont(new java.awt.Font("Monaco", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Username");
+        jLabel8.setForeground(new java.awt.Color(25, 118, 211));
+        jLabel8.setText("Username :");
 
+        jLabel5.setBackground(java.awt.Color.white);
         jLabel5.setFont(new java.awt.Font("Monaco", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Hospital Name");
+        jLabel5.setForeground(new java.awt.Color(25, 118, 211));
+        jLabel5.setText("Hospital Name : ");
 
-        jLabel3.setFont(new java.awt.Font("Monaco", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        hospName.setForeground(new java.awt.Color(25, 118, 211));
+
+        jLabel3.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(25, 118, 211));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Doctor Credentials");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(30, 268, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(258, 258, 258))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(217, 217, 217)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7))
+                        .addGap(73, 73, 73)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(docUserName)
+                            .addComponent(docPwd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(222, 222, 222)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5))
-                        .addGap(31, 31, 31)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(docId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(docName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hospName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(hospName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(docId, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(282, 282, 282)
-                        .addComponent(createDocBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(250, 250, 250)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel7))
-                                .addGap(31, 31, 31)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(docUserName)
-                                    .addComponent(docPwd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(createDocBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 195, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {docId, docName, docPwd, docUserName, hospName});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jLabel1)
-                .addGap(70, 70, 70)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(docId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(docId, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addGap(50, 50, 50))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -155,9 +177,9 @@ public class CreateDoctorPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(hospName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
+                .addGap(50, 50, 50)
                 .addComponent(jLabel3)
-                .addGap(39, 39, 39)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(docUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -166,9 +188,12 @@ public class CreateDoctorPanel extends javax.swing.JPanel {
                     .addComponent(jLabel7)
                     .addComponent(docPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
-                .addComponent(createDocBtn)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addComponent(createDocBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(116, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {docId, docName, docPwd, docUserName, hospName});
+
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -244,14 +269,16 @@ public class CreateDoctorPanel extends javax.swing.JPanel {
                 userStatement.setString(3, creds.getPassword());
                 userStatement.setString(4, creds.getRole());
                 if ((docStatement.executeUpdate() > 0) && userStatement.executeUpdate() > 0) {
-                    System.out.println("Created Doctor Successfully!");
+                    logger.info("Created Doctor Successfully!");
+                    JOptionPane.showMessageDialog(this, "Created Doctor Successfully!");
                     dbConn.commit();
                 } else {
-                    System.out.println("Failed to create doctor");
+                    logger.error("Failed to create doctor!");
+                    JOptionPane.showMessageDialog(this, "Failed to create doctor!");
                     dbConn.rollback();
                 }
             } else {
-                System.out.println("DB connection not connected");
+                logger.error("DB connection not connected");
             }
         } catch (SQLException sqlExp) {
             //rollback the connection

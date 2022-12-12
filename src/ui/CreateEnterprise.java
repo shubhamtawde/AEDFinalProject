@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import mail.SendMail.SendMail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -260,6 +261,8 @@ public class CreateEnterprise extends javax.swing.JPanel {
                 sqlStatement1.setString(5, licenseDate.getText());
                 
                 if (sqlStatement.executeUpdate() > 0 && sqlStatement1.executeUpdate() > 0) {
+                    SendMail s = new SendMail();
+                    s.sendMail(enterpriseEmail.getText());
                     System.out.println("commited");
                     dbConn.commit();
                 } else {

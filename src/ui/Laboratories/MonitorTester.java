@@ -5,6 +5,7 @@
 package ui.Laboratories;
 
 import Model.System.DatabaseConnection;
+import Model.Tester.Tester;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -247,6 +248,8 @@ public class MonitorTester extends javax.swing.JPanel {
             //Long id= Long.valueOf(TOOL_TIP_TEXT_KEY) model.getValueAt(selectedRowIndex,0);
             String id = String.valueOf(model.getValueAt(selectedRowIndex, 0));
             Long id_long = Long.valueOf(id);
+            Tester tester = new Tester();
+            tester.setTesterId(id_long);
             System.out.println(id);
             DatabaseConnection db = new DatabaseConnection();
             ResultSet dbResult = null;
@@ -261,10 +264,13 @@ public class MonitorTester extends javax.swing.JPanel {
                     //System.out.println(dbResult.next());
                     //populateTable(dbResult);
                     while (dbResult.next()) {
+                        tester.setTesterName(dbResult.getString(3));
+                        tester.setTesterUsername(dbResult.getString(5));
+                        tester.setTesterPassword(dbResult.getString(6));
 
-                        name.setText(dbResult.getString(3));
-                        username.setText(dbResult.getString(5));
-                        password.setText(dbResult.getString(6));
+                        name.setText(tester.getTesterName());
+                        username.setText(tester.getTesterUsername());
+                        password.setText(tester.getTesterPassword());
 
                     }
 
@@ -320,11 +326,13 @@ public class MonitorTester extends javax.swing.JPanel {
             System.out.println(id);
             DatabaseConnection db = new DatabaseConnection();
             ResultSet dbResult = null;
+            Tester tester = new Tester();
+            tester.setTesterId(id_long);
             try {
                 dbConn = db.getConnection();
                 if (dbConn != null) {
                     sqlStatement = dbConn.prepareStatement("delete from Tester where TesterId=?;");
-                    sqlStatement.setLong(1, id_long);
+                    sqlStatement.setLong(1, tester.getTesterId());
 
                     int result = sqlStatement.executeUpdate();
 
@@ -382,15 +390,20 @@ public class MonitorTester extends javax.swing.JPanel {
             System.out.println(id);
             DatabaseConnection db = new DatabaseConnection();
             ResultSet dbResult = null;
+            Tester tester = new Tester();
+            tester.setTesterName(name.getText());
+            tester.setTesterUsername(username.getText());
+            tester.setTesterPassword(password.getText());
+            tester.setTesterId(id_long);
             try {
                 dbConn = db.getConnection();
                 if (dbConn != null) {
                     sqlStatement = dbConn.prepareStatement("update Tester set TesterName=?,TesterUsername=?,TesterPassword=? where TesterId=?;");
 
-                    sqlStatement.setString(1, name.getText());
-                    sqlStatement.setString(2, username.getText());
-                    sqlStatement.setString(3, password.getText());
-                    sqlStatement.setLong(4, id_long);
+                    sqlStatement.setString(1, tester.getTesterName());
+                    sqlStatement.setString(2, tester.getTesterUsername());
+                    sqlStatement.setString(3, tester.getTesterPassword());
+                    sqlStatement.setLong(4, tester.getTesterId());
 
                     int result = sqlStatement.executeUpdate();
 
@@ -482,14 +495,22 @@ public class MonitorTester extends javax.swing.JPanel {
         model.setRowCount(0);
         try {
             while (dbResult.next()) {
+                Tester tester = new Tester();
+                tester.setTesterId(dbResult.getLong(1));
+                tester.setOrgId(dbResult.getLong(2));
+                tester.setTesterName(dbResult.getString(3));
+                tester.setTesterEmail(dbResult.getString(4));
+                tester.setTesterUsername(dbResult.getString(5));
+                tester.setTesterPassword(dbResult.getString(6));
+                tester.setTesterLicense(dbResult.getString(7));
                 Object[] row = new Object[7];
-                row[0] = dbResult.getLong(1);
-                row[1] = dbResult.getLong(2);
-                row[2] = dbResult.getString(3);
-                row[3] = dbResult.getString(4);
-                row[4] = dbResult.getString(5);
-                row[5] = dbResult.getString(6);
-                row[6] = dbResult.getString(7);
+                row[0] = tester.getTesterId();
+                row[1] = tester.getOrgId();
+                row[2] = tester.getTesterName();
+                row[3] = tester.getTesterEmail();
+                row[4] = tester.getTesterUsername();
+                row[5] = tester.getTesterPassword();
+                row[6] = tester.getTesterLicense();
                 model.addRow(row);
             }
         } catch (Exception e) {
